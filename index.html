@@ -693,8 +693,13 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 45%", end: "top 
 /* ============ MISSION ============ */
 const missionWs = splitWords(document.querySelector("#missionTxt"));
 gsap.to(missionWs, {
-  opacity: 1, y: 0, stagger: .02, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 75%", end: "top 25%", scrub: .4 }
+  opacity: 1, y: 0, stagger: .018, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top 55%", end: "top 5%", scrub: .4 }
+});
+// thumbnails slide-in bertahap (ref: tiles masuk satu per satu dari arah berbeda)
+gsap.from("#mission img", {
+  autoAlpha: 0, y: 60, stagger: .12, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top 60%", end: "top 12%", scrub: .4 }
 });
 document.querySelectorAll("#mission img").forEach(img => {
   const dy = parseFloat(img.dataset.dy || 0);
@@ -721,9 +726,15 @@ const secTl = gsap.timeline({
     }
   }
 });
-// filmstrip: semua layer satu pita, digeser vertikal (bukti ref: HomeAnimation-landscape-sticky)
+// push cepat + HOLD (bukti settled ref: split lalu hold statis, bukan crossfade)
+// pita digeser 100% per boundary, diam (hold) di antaranya
+const pita = { k: 0 };
+const applyPita = () => sLayers.forEach((L, j) => gsap.set(L, { yPercent: (j - pita.k) * 100 }));
+applyPita();
+window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
 sLayers.forEach((L, i) => {
-  secTl.fromTo(L, { yPercent: i * 100 }, { yPercent: (i - 5) * 100, ease: "none", duration: 1 }, 0);
+  if (i === 0) return;
+  secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, i / 5 - .025);
 });
 
 /* ============ INNOVATION ============ */
@@ -736,7 +747,8 @@ const apLayers = document.querySelectorAll(".aplayer");
 const apDots = document.querySelectorAll("#apDots b");
 const sideT = document.querySelector("#apSide .t");
 const sideNames = ["Discover", "Develop", "Deploy"];
-gsap.set(apLayers, { autoAlpha: 1 });
+gsap.set(apLayers, { autoAlpha: 0 });
+gsap.set(apLayers[0], { autoAlpha: 1 });
 gsap.fromTo("#apCircles", { scale: .82, yPercent: 8 }, {
   scale: 1, yPercent: 0, ease: "none",
   scrollTrigger: { trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .5 }
@@ -751,8 +763,12 @@ const apTl = gsap.timeline({
     }
   }
 });
+// crossfade chapter (sama dgn ref: teks fade in/out, bukan geser pita)
 apLayers.forEach((L, i) => {
-  apTl.fromTo(L, { yPercent: i * 100 }, { yPercent: (i - 3) * 100, ease: "none", duration: 1 }, 0);
+  if (i === 0) return;
+  const t = i / 3;
+  apTl.fromTo(L, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: .05 }, t - .025);
+  apTl.to(apLayers[i - 1], { autoAlpha: 0, ease: "none", duration: .05 }, t - .025);
 });
 
 /* ============ normalisasi durasi scrub = 1 (posisi anak = fraksi scroll) ============ */
