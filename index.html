@@ -115,7 +115,7 @@ button,input{font:inherit;color:inherit}
 .prosph .w{display:inline-block;opacity:0;transform:translateY(.5em)}
 
 /* ---------- 3 GRAPH ---------- */
-#graph{height:237svh;background:var(--cream);z-index:1}
+#graph{height:220svh;background:var(--cream);z-index:1}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
 .gbox .limepart{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime);overflow:hidden}
@@ -134,7 +134,7 @@ button,input{font:inherit;color:inherit}
 .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
 /* ---------- 4 WORDS ---------- */
-#words{height:260svh;background:var(--cream);z-index:1}
+#words{height:230svh;background:var(--cream);z-index:1}
 #words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
 .wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:59.67svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
 .wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
@@ -697,7 +697,7 @@ s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .80
 const gtl = gsap.timeline({
   scrollTrigger: { trigger: "#graph", start: "top top", end: "bottom bottom", scrub: .5 }
 });
-gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .4 }, .05);
+gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .2 }, .05);
 gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .75);
 gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .8);
 gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .5);
@@ -740,7 +740,7 @@ const missionWs = document.querySelectorAll("#missionTxt .ml");
 // reveal per baris DIMULAI saat teks masuk viewport (ref: p0.46 baris1 → p0.50 semua)
 gsap.to(missionWs, {
   opacity: 1, y: 0, stagger: .1, duration: .2, ease: "none",
-  scrollTrigger: { trigger: "#missionTxt", start: "top bottom", end: "top 15%", scrub: .4 }
+  scrollTrigger: { trigger: "#missionTxt", start: "top bottom", end: "top 40%", scrub: .4 }
 });
 // thumbnails slide-in bersamaan awal reveal (ref: tiles masuk 1 per 1)
 gsap.from("#mission img", {
