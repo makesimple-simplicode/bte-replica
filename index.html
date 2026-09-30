@@ -268,6 +268,14 @@ button,input{font:inherit;color:inherit}
   .footer .plink{height:auto;padding:1.4rem 1.6rem;font-size:2.6rem}
   .footer .plink+.plink{border-left:0}
 }
+/* mobile rules (source app.css ref): labels -26.4cqw / subtitle -25.8cqw (<48em); sidetitle portrait (12/9) bottom */
+@media (max-width: 47.99em){
+  .wlabels { left: -26.4cqw; }
+  .wsub { right: -25.8cqw; }
+}
+@media (max-aspect-ratio: 12/9){
+  .eyebrow-pos { top: auto; bottom: 3.8rem; left: auto; right: var(--side); transform: none; text-align: center; }
+}
 </style>
 </head>
 <body>
