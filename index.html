@@ -20,24 +20,23 @@
 }
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:clip}
-img{display:block;max-width:100%}
+img,video{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button,input{font:inherit;color:inherit}
 .t-h3{font-weight:500;font-size:min(calc((2.8rem) + (6 - 2.8) * (100vw - 37.5rem) / 106.5),6rem);letter-spacing:-.02em;line-height:1.08}
 .eyebrow{font-family:var(--serif);font-size:1.2rem;font-weight:400;line-height:1;letter-spacing:.12em;text-transform:uppercase}
-.rv{opacity:0;translate:0 20px;transition:opacity .4s ease,translate .4s ease}
-.rv.in{opacity:1;translate:0 0}
-@media (prefers-reduced-motion:reduce){.rv{opacity:1;translate:0 0;transition:none}*{animation:none!important}}
 
-/* intro curtain (PageTransition — timing est .8s) */
-#curtain{position:fixed;inset:0;z-index:100;background:var(--cream);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:2rem;transition:transform .8s cubic-bezier(.76,0,.24,1)}
-#curtain.gone{transform:translateY(-101%)}
-#curtain .ring{width:76px;height:76px;color:var(--ink);animation:spin 7s linear infinite}
-#curtain .ring g{stroke-width:1.6!important}
-#curtain .word{font-family:var(--serif);letter-spacing:.14em;text-transform:uppercase;font-size:1.2rem;color:var(--ink)}
-@keyframes spin{to{transform:rotate(360deg)}}
+/* ---------- intro curtain (PageTransition ref: lime sweep horizontal + logo cream) ---------- */
+#curtain{position:fixed;inset:0;z-index:100;overflow:hidden;pointer-events:none}
+#curtain .pt-wrap{position:absolute;top:0;left:0;height:100%;display:flex;flex-direction:row;will-change:transform;transform:translateX(-75vw)}
+#curtain .pt-gl,#curtain .pt-gr{width:75vw;height:100%;flex:none}
+#curtain .pt-gl{background:linear-gradient(to right,#dfff5c,#dfff5cbc 19%,#dfff5c8a 34%,#dfff5c61 47%,#dfff5c47 56.5%,#dfff5c31 65%,#dfff5c20 73%,#dfff5c13 80.2%,#dfff5c0b 86.1%,#dfff5c05 91%,#dfff5c02 95.2%,#dfff5c01 98.2%,#dfff5c00)}
+#curtain .pt-c{width:100vw;height:100%;flex:none;background:#dfff5c}
+#curtain .pt-gr{background:linear-gradient(to right,#dfff5c,#dfff5cbc 19%,#dfff5c8a 34%,#dfff5c61 47%,#dfff5c47 56.5%,#dfff5c31 65%,#dfff5c20 73%,#dfff5c13 80.2%,#dfff5c0b 86.1%,#dfff5c05 91%,#dfff5c02 95.2%,#dfff5c01 98.2%,#dfff5c00)}
+#curtain .pt-logo{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:#fafbf8}
+#curtain .pt-logo svg{width:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem);height:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem)}
 
-/* nav */
+/* ---------- nav ---------- */
 .nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none}
 .nav *{pointer-events:auto}
 .nav .left{font-weight:500;font-size:1.5rem;line-height:1.05;letter-spacing:-.01em;color:var(--cream);white-space:pre-line;transition:opacity .3s}
@@ -47,16 +46,18 @@ button,input{font:inherit;color:inherit}
 .ring g{stroke-width:2.4!important}
 .nav .right{width:min(10.3rem,8vw);display:flex;justify-content:flex-end}
 .burger{width:4rem;height:4rem;background:none;border:0;cursor:pointer;display:flex;flex-direction:column;justify-content:center;gap:.55rem;align-items:flex-end;margin-right:-.4rem}
-.burger span{display:block;width:2.4rem;height:2px;background:var(--cream);transition:background .3s}
+.burger span{display:block;width:2.4rem;height:2px;background:var(--cream);transition:background .3s,transform .3s}
 .nav.dark .left,.nav.dark .ring{color:var(--ink)}
 .nav.dark .burger span{background:var(--ink)}
+.burger:hover span:nth-child(2){transform:scaleX(.7);transform-origin:right}
 @media (max-width:47.99em){.nav .left{font-size:1.3rem}}
 
-/* menu overlay (lime right-half) */
-.menu{position:fixed;top:12px;right:12px;width:44%;height:calc(100% - 24px);background:var(--lime);z-index:70;transform:translateX(101%);transition:transform .45s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:9rem 3rem 3rem}
+/* ---------- menu ---------- */
+.menu{position:fixed;top:12px;right:12px;width:44%;height:calc(100% - 24px);background:var(--lime);z-index:70;transform:translateX(calc(100% + 24px));transition:transform .45s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:9rem 3rem 3rem}
 .menu.open{transform:none}
 .menu .links{display:flex;flex-direction:column}
-.menu .links a{font-weight:500;font-size:min(calc((2rem) + (4 - 2) * (100vw - 37.5rem) / 106.5),4rem);letter-spacing:-.02em;line-height:1.1;padding:1.1rem 0;border-bottom:1px solid rgba(18,17,14,.6);color:var(--ink)}
+.menu .links a{font-weight:500;font-size:min(calc((2rem) + (4 - 2) * (100vw - 37.5rem) / 106.5),4rem);letter-spacing:-.02em;line-height:1.1;padding:1.1rem 0;border-bottom:1px solid rgba(18,17,14,.6);color:var(--ink);transition:padding-left .3s ease}
+.menu .links a:hover{padding-left:1.2rem}
 .menu .links a:first-child{border-top:1px solid rgba(18,17,14,.6)}
 .menu .bottom{display:flex;align-items:flex-end;justify-content:space-between;color:var(--ink)}
 .menu .bottom .home{font-weight:500;font-size:min(calc((2.2rem) + (4.8 - 2.2) * (100vw - 37.5rem) / 106.5),4.8rem);letter-spacing:-.02em}
@@ -65,99 +66,106 @@ button,input{font:inherit;color:inherit}
 .menu.open .close{opacity:1;pointer-events:auto}
 @media (max-width:63.99em){.menu{width:100%}.menu .close{left:0;top:6rem}}
 
-/* 1 HERO */
-.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;color:var(--cream)}
+/* ---------- pin scaffold ---------- */
+.pin{position:relative}
+.pin>.pinned{position:sticky;top:0;height:100svh;overflow:hidden}
+
+/* ---------- 1 HERO ---------- */
+.hero{position:relative;height:100svh;min-height:560px;overflow:hidden;color:var(--cream);z-index:0}
 .hero .bg{position:absolute;inset:0}
-.hero .bg img{width:100%;height:100%;object-fit:cover}
+.hero .bg video,.hero .bg img{width:100%;height:100%;object-fit:cover}
 .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,16,.38),rgba(8,10,16,.12) 45%,rgba(8,10,16,.55))}
 .hero .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 var(--side)}
 .hero h1{font-weight:500;font-size:min(9.64vw,10vh);line-height:.97em;letter-spacing:-.04em;white-space:pre-line;font-kerning:none}
 @media (max-width:47.99em){.hero h1{font-size:14.23vw}}
 .hero h1 .line{display:block;overflow:hidden}
-.hero h1 .line i{display:block;font-style:normal;transform:translateY(110%);transition:transform .7s cubic-bezier(.33,1,.68,1)}
-.hero.loaded h1 .line i{transform:none}
-.hero h1 .line:nth-child(2) i{transition-delay:.08s}
+.hero h1 .line i{display:block;font-style:normal;transform:translateY(110%)}
 .hero h1 .line.r{display:flex;justify-content:flex-end;width:100%}
-.hero .sub{margin-top:2.8rem;max-width:44rem;font-size:1.7rem;line-height:1.4;opacity:0;transition:opacity .6s ease .55s;color:rgba(250,251,248,.92)}
-.hero.loaded .sub{opacity:1}
-.scrollcue{position:absolute;bottom:2.4rem;left:calc(var(--side) - .65rem);height:30px;display:flex;align-items:center;gap:.6rem;color:var(--cream);font-size:1.4rem;line-height:1.15em;z-index:6}
-.scrollcue svg{width:1.3rem;height:1.3rem;animation:cue 1.6s ease-in-out infinite}
-@keyframes cue{50%{transform:translateY(4px)}}
+.hero .sub{margin-top:2.8rem;max-width:44rem;font-size:1.7rem;line-height:1.4;opacity:0;color:rgba(250,251,248,.92)}
+.scrollcue{position:absolute;bottom:2.4rem;left:calc(var(--side) - .65rem);height:30px;display:flex;align-items:center;gap:.6rem;color:var(--cream);font-size:1.4rem;line-height:1.15em;z-index:6;opacity:0}
+.scrollcue svg{width:1.3rem;height:1.3rem}
 
-/* 2 COLLAGE (white, scattered) */
-.collage{position:relative;height:100svh;background:#fff;overflow:hidden}
-.collage img{position:absolute;object-fit:cover;box-shadow:0 14px 40px rgba(18,17,14,.14)}
-.collage .c1{width:16%;height:33%;left:0;top:0}
-.collage .c2{width:22%;height:18%;left:20%;top:36%}
-.collage .c3{width:14%;height:30%;left:41%;top:16%;transform:rotate(-2deg)}
-.collage .c4{width:15%;height:24%;left:6%;top:57%}
-.collage .c5{width:13%;height:26%;left:23%;top:64%}
-.collage .c6{width:17%;height:15%;left:39%;top:76%}
-.collage .c7{width:18%;height:20%;right:4%;top:8%}
-.collage .c8{width:20%;height:24%;right:2%;top:57%}
-.collage .c9{width:12%;height:16%;right:24%;top:70%}
-.mlime{background:var(--lime)}
-.lattice g{stroke-width:.35}
+/* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
+#stage1{height:400svh;background:var(--cream);z-index:1}
+#stage1 .pinned{background:var(--cream)}
+.s1bg{position:absolute;inset:0;background:var(--cream)}
+.s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
+.s1imgs{position:absolute;inset:0}
+.s1imgs img{position:absolute;object-fit:cover;box-shadow:0 14px 40px rgba(18,17,14,.14)}
+.i1{width:16%;height:33%;left:0;top:0}
+.i2{width:22%;height:18%;left:20%;top:36%}
+.i3{width:14%;height:30%;left:41%;top:16%}
+.i4{width:15%;height:24%;left:6%;top:57%}
+.i5{width:13%;height:26%;left:23%;top:64%}
+.i6{width:17%;height:15%;left:39%;top:76%}
+.i7{width:18%;height:20%;right:4%;top:8%}
+.i8{width:20%;height:24%;right:2%;top:57%}
+.i9{width:12%;height:16%;right:24%;top:70%}
+.mark1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,42vh);height:min(22vw,42vh);color:var(--lime)}
+.mark2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(40vw,50svh);height:min(40vw,50svh);color:rgba(250,251,248,.7);opacity:0}
 .mline{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:min(64%,1000px);text-align:center;font-weight:500;font-size:min(calc((2.4rem) + (4.2 - 2.4) * (100vw - 37.5rem) / 106.5),4.2rem);letter-spacing:-.02em;line-height:1.2;color:var(--ink);z-index:3}
-.collage .rosette{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,42vh);height:min(22vw,42vh);color:var(--lime);z-index:2}
+.mline .w{display:inline-block;opacity:0;transform:translateY(.4em)}
+.prosph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;font-weight:500;font-size:min(calc((3.4rem) + (7 - 3.4) * (100vw - 37.5rem) / 106.5),7rem);letter-spacing:-.03em;color:var(--ink);text-align:center;white-space:nowrap}
+.prosph .w{display:inline-block;opacity:0;transform:translateY(.5em)}
 
-/* 3 LIME prosperity */
-.prosper{position:relative;height:100svh;background:var(--lime);display:flex;align-items:center;justify-content:center;overflow:hidden}
-.prosper .lattice{position:absolute;width:min(40vw,50svh);height:min(40vw,50svh);color:rgba(250,251,248,.7)}
-.prosper h2{position:relative;z-index:2;font-weight:500;font-size:min(calc((3.4rem) + (7 - 3.4) * (100vw - 37.5rem) / 106.5),7rem);letter-spacing:-.03em;color:var(--ink);text-align:center}
-
-/* 4 GRAPH */
-.graph{position:relative;height:100svh;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
-.gtext{position:absolute;top:0;left:0;width:100%;height:100%;padding:4cqw 3.8cqw;z-index:2;font-weight:500;font-size:max(12px,7.2cqw);letter-spacing:-.02em;line-height:1.1}
-.gtext p{margin-top:.6em;font-size:.42em;line-height:1.35;color:rgba(18,17,14,.72);max-width:92%}
-.graph .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%)}
-.gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:hidden}
-.gbox .limepart{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime);transition:height .9s cubic-bezier(.33,1,.68,1) .15s}
-.graph.in .gbox .limepart{height:32%}
+/* ---------- 3 GRAPH ---------- */
+#graph{height:170svh;background:var(--cream);z-index:1}
+#graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
+.gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
+.gbox .limepart{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime)}
 .gbox .corner{position:absolute;width:2.8rem;height:2.8rem;color:var(--ink)}
 .gbox .corner.tl{left:-1.4rem;top:-1.4rem}
 .gbox .corner.br{right:-1.4rem;bottom:-1.4rem}
 .gbox .corner svg{stroke-width:.8px;width:100%;height:100%}
-.gmark{position:absolute;left:100%;display:flex;align-items:center;gap:.7rem;white-space:nowrap}
+.gtext{position:absolute;top:0;left:0;width:100%;height:100%;padding:4cqw 3.8cqw;z-index:2;font-weight:500;font-size:max(12px,7.2cqw);letter-spacing:-.02em;line-height:1.1}
+.gtext p{margin-top:.6em;font-size:.42em;line-height:1.35;color:rgba(18,17,14,.72);max-width:92%}
+.gmark{position:absolute;left:100%;display:flex;align-items:center;gap:.7rem;white-space:nowrap;opacity:0}
 .gmark::before{content:"";width:2.6rem;height:1px;background:var(--ink)}
 .gmark .n{font-weight:500;font-size:2rem;letter-spacing:-.02em;display:block}
 .gmark .y{font-family:var(--serif);font-size:1.15rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,17,14,.75);display:block;margin-top:.2rem}
 .gmark.top{top:6%}
 .gmark.mid{top:68%}
+.eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
-/* 5 WORDS */
-.words-sec{position:relative;height:100svh;background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
-.words-sec .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
+/* ---------- 4 WORDS ---------- */
+#words{height:340svh;background:var(--cream);z-index:1}
+#words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
 .wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:59.67svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
-.wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
 .wtypo{font-weight:500;font-size:max(20px,14.65cqw);line-height:1.08;letter-spacing:-.04em;position:relative;z-index:3}
 .wlabels{position:absolute;bottom:50cqh;left:-24cqw;z-index:3}
-.wsub{position:absolute;bottom:50cqh;right:-24cqw;z-index:3;text-align:right}
+.wlabels>div{opacity:0;transform:translateY(.35em)}
+.wlabelsW,.wsubW{color:var(--cream)}
+.wlabelsW{clip-path:inset(0 0 0 24cqw)}
+.wsubW{clip-path:inset(0 24cqw 0 0)}
+.wsub{position:absolute;bottom:50cqh;right:-24cqw;z-index:3;text-align:right;opacity:0;transform:translateY(.35em)}
 .wsub .lime{color:var(--lime)}
 .plus{position:absolute;width:2rem;height:2rem;color:var(--ink);z-index:4}
 .plus.tl{left:-1rem;top:-1rem}
 .plus.br{right:-1rem;bottom:-1rem}
 
-/* 6 QUOTE */
-.quote{position:relative;height:100svh;overflow:hidden;color:var(--cream)}
+/* ---------- 5 QUOTE ---------- */
+.quote{position:relative;height:100svh;overflow:hidden;color:var(--cream);z-index:1}
 .quote .bg{position:absolute;inset:0}
-.quote .bg img{width:100%;height:100%;object-fit:cover}
+.quote .bg video,.quote .bg img{width:100%;height:100%;object-fit:cover}
 .quote .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,10,.3),rgba(10,14,10,.05) 40%,rgba(10,14,10,.38))}
-.quote .q{position:absolute;top:14svh;right:var(--side);width:min(58%,860px);text-align:right;font-weight:500;font-size:min(calc((1.7rem) + (2.6 - 1.7) * (100vw - 37.5rem) / 106.5),2.6rem);letter-spacing:-.01em;line-height:1.2;font-kerning:none}
+.quote .q{position:absolute;top:14svh;right:var(--side);width:min(58%,860px);text-align:right;font-weight:500;font-size:min(calc((1.7rem) + (2.6 - 1.7) * (100vw - 37.5rem) / 106.5),2.6rem);letter-spacing:-.01em;line-height:1.2;font-kerning:none;clip-path:inset(0 0 100% 0)}
 .quote .q em{font-style:normal;color:var(--lime)}
 .quote .bottom{position:absolute;right:var(--side);bottom:var(--side);display:flex;align-items:flex-end;gap:2.4rem}
-.quote .who{font-size:1.6rem;font-weight:500;text-align:right}
+.quote .who{font-size:1.6rem;font-weight:500;text-align:right;opacity:0;transform:translateY(24px)}
 .quote .who span{display:block;color:var(--lime);font-weight:400;font-size:1.4rem;margin-top:.35rem}
-.quote .card{position:relative;width:25rem;max-width:42vw;background:#efefec;border-radius:4px;overflow:hidden;padding:.8rem;display:flex}
-.quote .card img{width:100%;border-radius:3px}
-.quote .play{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:4rem;height:4rem;border:1.5px solid rgba(18,17,14,.85);border-radius:6px;background:rgba(250,251,248,.7);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.quote .card{position:relative;width:25rem;max-width:42vw;background:#efefec;border-radius:4px;overflow:hidden;padding:.8rem;display:flex;opacity:0;transform:translateY(40px)}
+.quote .card video,.quote .card img{width:100%;border-radius:3px}
+.quote .play{position:absolute;left:.9rem;top:50%;transform:translateY(-50%);width:4rem;height:4rem;border:1.5px solid rgba(18,17,14,.85);border-radius:6px;background:rgba(250,251,248,.7);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .25s}
+.quote .play:hover{transform:translateY(-50%) scale(1.08)}
 .quote .play svg{width:1.2rem;height:1.2rem;color:var(--ink);margin-left:.15rem}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
-/* 7 MISSION (black + scatter) */
-.mission{position:relative;height:100svh;background:#000;overflow:hidden;color:var(--cream)}
+/* ---------- 6 MISSION ---------- */
+.mission{position:relative;height:100svh;background:#000;overflow:hidden;color:var(--cream);z-index:1}
 .mission .txt{position:absolute;left:var(--side);top:34svh;width:min(47%,700px);font-weight:500;font-size:min(calc((1.6rem) + (2.7 - 1.6) * (100vw - 37.5rem) / 106.5),2.7rem);line-height:1.14;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
+.mission .txt .w{display:inline-block;opacity:0;transform:translateY(.4em)}
 .mission img{position:absolute;object-fit:cover;box-shadow:0 16px 46px rgba(0,0,0,.5)}
 .mission .m1{width:9%;height:14%;left:6%;top:8%}
 .mission .m2{width:14%;height:19%;right:6%;top:9%}
@@ -166,95 +174,107 @@ button,input{font:inherit;color:inherit}
 .mission .m5{width:11%;height:15%;left:42%;top:74%}
 @media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
 
-/* 8 SECTORS */
-.sector{position:relative;height:100svh;background:#000;overflow:hidden;color:var(--cream)}
-.sframe{position:absolute;left:50%;top:calc(50% + 3svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:62svh;overflow:hidden;z-index:2}
-.sframe>img{width:100%;height:100%;object-fit:cover}
+/* ---------- 7 SECTORS (pinned x5) ---------- */
+#sectors{height:550svh;background:#000;z-index:1}
+#sectors .pinned{background:#000}
+.slayer{position:absolute;inset:0;visibility:hidden}
+.slayer .sframe{position:absolute;left:50%;top:calc(50% + 3svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:62svh;overflow:hidden;z-index:2}
+.slayer .sframe video,.slayer .sframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stitle{position:absolute;left:0;top:calc(50% - 31svh);width:100%;text-align:center;font-weight:700;font-size:min(11vw,15svh);line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
 .sframe .clonetitle{position:absolute;left:50%;top:0;width:100vw;transform:translate(-50%,-45%);text-align:center;font-weight:700;font-size:min(11vw,15svh);line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
 .sinfo{position:absolute;left:2.4rem;bottom:1.4rem;max-width:64%;z-index:4;text-align:left}
 .sbadge{display:inline-block;border:1px solid rgba(250,251,248,.85);border-radius:999px;padding:.5rem 1.1rem;font-size:1.3rem;margin-bottom:1rem;background:rgba(0,0,0,.3)}
 .spara{font-size:1.55rem;line-height:1.4;color:#fff;text-shadow:0 1px .8rem rgba(0,0,0,.55);max-width:44rem}
-.spill{position:absolute;left:50%;bottom:calc(var(--side) + 2.4rem);transform:translateX(-50%);height:3.8rem;padding:0 1.8rem;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.5rem;font-weight:500;display:flex;align-items:center;z-index:5;white-space:nowrap}
-@media (max-width:47.99em){.spill{height:3.2rem;font-size:1.4rem}}
-.sdots{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:4}
-.sdots b{width:.68rem;height:.68rem;border-radius:50%;border:1.5px solid rgba(250,251,248,.9);background:transparent}
+.spill{position:absolute;left:50%;bottom:calc(var(--side) + 2.4rem);transform:translateX(-50%);height:3.8rem;padding:0 1.8rem;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.5rem;font-weight:500;display:flex;align-items:center;z-index:5;white-space:nowrap;transition:filter .25s}
+.spill:hover{filter:brightness(.93)}
+.sdots{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:6}
+.sdots b{width:.68rem;height:.68rem;border-radius:50%;border:1.5px solid rgba(250,251,248,.9);background:transparent;transition:background .2s,border-color .2s}
 .sdots b.on{background:var(--lime);border-color:var(--lime)}
-@media (max-width:63.99em){.sframe{width:94vw;height:56svh}.stitle,.sframe .clonetitle{font-size:14vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
+@media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:14vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
 
-/* 9 INNOVATION */
-.innov{position:relative;height:100svh;background:#000;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible}
+/* ---------- 8 INNOVATION ---------- */
+.innov{position:relative;height:100svh;background:#000;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible;z-index:1}
 .innov h2{font-weight:400;font-size:min(calc((2.6rem) + (5.2 - 2.6) * (100vw - 37.5rem) / 106.5),5.2rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
 .innov h2 .lime{color:var(--lime);font-weight:700}
-.innov .ticker2{position:absolute;top:70%;left:0;width:100%;overflow:hidden;white-space:nowrap;opacity:.92}
-.innov .ticker2 .run{display:inline-flex;gap:4rem;padding-right:4rem;animation:run 40s linear infinite}
-.innov .ticker2 .it{font-size:2rem;font-weight:500;letter-spacing:-.01em}
-.innov .ticker2 .it .n{color:var(--lime);margin-right:.5rem}
-@keyframes run{to{transform:translateX(-50%)}}
-.innov .pill{position:absolute;left:50%;bottom:2.4rem;transform:translateX(-50%);height:3.8rem;width:22rem;max-width:86vw;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5}
+.innov h2 .line{display:block;overflow:hidden}
+.innov h2 .line>span{display:block;transform:translateY(110%)}
+.innov .pill{position:absolute;left:50%;bottom:2.4rem;transform:translateX(-50%);height:3.8rem;width:22rem;max-width:86vw;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0;transition:filter .25s}
+.innov .pill:hover{filter:brightness(.93)}
 
-/* 10 APPROACH panels */
-.ap{position:relative;height:100svh;background:var(--cream);color:var(--ink);display:flex;align-items:center;padding:0 var(--side);overflow:hidden}
-.ap .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem}
-.ap .pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45)}
-.ap .pdots b.on{background:var(--lime);border-color:var(--lime)}
-.ap .chapter{width:min(34%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
-.ap .chapter .body{margin-top:.7em;font-size:1.7rem;line-height:1.44;font-weight:400;color:rgba(128,128,128,.95);text-wrap:balance}
-.ap .circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh)}
-.ap .circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
-.ap .circles .o1{width:100%;height:100%;background:var(--lime)}
-.ap .circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
-.ap .circles .o3{width:56%;height:56%;background:rgba(235,245,195,.9)}
-.ap .circles .o4{width:40%;height:40%;background:rgba(195,189,184,.95)}
-.ap .axis{position:absolute;left:-12%;bottom:24%;width:126%;height:1px;background:rgba(18,17,14,.8);z-index:2}
-.ap .axis::before{content:"+";position:absolute;left:6%;top:-.8rem;font-size:1.3rem;color:rgba(18,17,14,.85);background:var(--cream);padding:0 .25rem}
-.ap .axis .lbl{position:absolute;right:0;top:-1.7rem;font-size:1.35rem;color:rgba(18,17,14,.85)}
-.ap .scale{position:absolute;right:calc(var(--side) + .8rem);top:18%;bottom:18%;width:1px;background:rgba(18,17,14,.75);display:flex;flex-direction:column;align-items:center;justify-content:space-between}
-.ap .scale span{font-family:var(--serif);font-size:1.3rem;letter-spacing:.1em;text-transform:uppercase;background:var(--cream);padding:.5rem .3rem;color:rgba(18,17,14,.85);white-space:nowrap}
-@media (max-width:63.99em){.ap .chapter{width:84%;margin-left:2.4rem}.ap .circles{opacity:.35}}
+/* ---------- 9 APPROACH (pinned x3) ---------- */
+#approach{height:330svh;background:var(--cream);z-index:1}
+#approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
+.aplayer{position:absolute;inset:0;z-index:2;visibility:hidden;display:flex;align-items:center;padding:0 var(--side)}
+.aplayer .chapter{width:min(34%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
+.aplayer .chapter .body{margin-top:.7em;font-size:1.7rem;line-height:1.44;font-weight:400;color:rgba(128,128,128,.95);text-wrap:balance}
+.pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
+.pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45);transition:background .2s}
+.pdots b.on{background:var(--lime)}
+.circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh);z-index:1}
+.circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
+.circles .o1{width:100%;height:100%;background:var(--lime)}
+.circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
+.circles .o3{width:56%;height:56%;background:rgba(235,245,195,.9)}
+.circles .o4{width:40%;height:40%;background:rgba(195,189,184,.95)}
+.axis{position:absolute;left:-12%;bottom:24%;width:126%;height:1px;background:rgba(18,17,14,.8);z-index:2}
+.axis::before{content:"+";position:absolute;left:6%;top:-.8rem;font-size:1.3rem;color:rgba(18,17,14,.85);background:var(--cream);padding:0 .25rem}
+.axis .lbl{position:absolute;right:0;top:-1.7rem;font-size:1.35rem;color:rgba(18,17,14,.85)}
+.sidetitle{position:absolute;right:calc(var(--side) + .8rem);top:18%;bottom:18%;width:1px;background:rgba(18,17,14,.75);display:flex;flex-direction:column;align-items:center;justify-content:space-between;z-index:3}
+.sidetitle span{font-family:var(--serif);font-size:1.3rem;letter-spacing:.1em;text-transform:uppercase;background:var(--cream);padding:.5rem .3rem;color:rgba(18,17,14,.85);white-space:nowrap}
+.sidetitle .t{writing-mode:vertical-rl;letter-spacing:.2em;padding:.3rem .5rem}
+@media (max-width:63.99em){.aplayer .chapter{width:84%;margin-left:2.4rem}.circles{opacity:.35}}
 
-/* 11 SIGNUP */
-.signup{background:var(--grey);color:#fff;border-top:1px solid rgba(18,17,14,.3);padding:4.4rem var(--side) 8rem}
+/* ---------- 10 SIGNUP ---------- */
+.signup{background:var(--grey);color:#fff;border-top:1px solid rgba(18,17,14,.3);padding:4.4rem var(--side) 8rem;position:relative;z-index:1}
 .signup .row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap)}
 .signup .col-l{grid-column:1/-1}
 .signup .col-r{grid-column:1/-1;margin-top:3.4rem}
 @media (min-width:48em){.signup .col-l{grid-column:1/span 6}.signup .col-r{grid-column:7/-1;margin-top:0}}
 @media (min-width:120em){.signup .col-l{grid-column:1/span 5}.signup .col-r{grid-column:7/-1}}
 .signup .title{margin-bottom:1.6rem;color:#fff}
-.signup .title span{display:block}
-.signup .txt{max-width:43rem;font-size:1.6rem;line-height:1.45;color:rgba(250,251,248,.9)}
+.signup .title span{display:block;overflow:hidden}
+.signup .title span i{display:block;font-style:normal;transform:translateY(110%)}
+.signup .txt{max-width:43rem;font-size:1.6rem;line-height:1.45;color:rgba(250,251,248,.9);opacity:0;transform:translateY(20px)}
 .signup form{margin-top:2.2rem;display:flex;flex-direction:column;gap:1.6rem;max-width:43rem}
+.signup .field{position:relative;opacity:0;transform:translateY(22px)}
 .signup .field label{display:block;font-family:var(--serif);font-size:1.15rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(250,251,248,.95);margin-bottom:.5rem}
-.signup .field{position:relative}
-.signup input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(250,251,248,.55);padding:.55rem 0;font-size:1.5rem;outline:none;color:#fff}
+.signup input{width:100%;background:transparent;border:0;border-bottom:1px solid rgba(250,251,248,.55);padding:.55rem 0;font-size:1.5rem;outline:none;color:#fff;transition:border-color .25s}
+.signup input:focus{border-color:#fff}
 .signup input::placeholder{color:rgba(250,251,248,.65)}
-.signup .arrow{position:absolute;right:0;bottom:.35rem;width:3rem;height:3rem;border:0;background:none;color:#fff;cursor:pointer;font-size:1.7rem}
+.signup .arrow{position:absolute;right:0;bottom:.35rem;width:3rem;height:3rem;border:0;background:none;color:#fff;cursor:pointer;font-size:1.7rem;transition:transform .25s}
+.signup .arrow:hover{transform:translate(3px,-3px)}
 
-/* 12 FOOTER */
+/* ---------- 11 FOOTER ---------- */
 .footer{width:100%;background:#000;position:sticky;bottom:0;z-index:-1;overflow:hidden;color:var(--cream)}
 .footer .primary{display:flex;flex-direction:row;border-top:1px solid rgba(250,251,248,.3)}
-.footer .plink{flex:1;height:37.7rem;position:relative;border-bottom:1px solid rgba(250,251,248,.3);display:flex;align-items:flex-end;justify-content:space-between;padding:0 calc(var(--gap) - 1.3rem) 1.8rem calc(var(--gap) - .3rem);color:var(--cream);font-weight:500;font-size:min(calc((2.2rem) + (4.8 - 2.2) * (100vw - 37.5rem) / 106.5),4.8rem);letter-spacing:-.03em}
-.footer .plink + .plink{border-left:1px solid rgba(250,251,248,.3)}
-.footer .plink svg{width:2.6rem;height:2.6rem;flex:none;color:var(--lime);margin-left:1rem}
+.footer .plink{flex:1;height:37.7rem;position:relative;border-bottom:1px solid rgba(250,251,248,.3);display:flex;align-items:flex-end;justify-content:space-between;padding:0 calc(var(--gap) - 1.3rem) 1.8rem calc(var(--gap) - .3rem);color:var(--cream);font-weight:500;font-size:min(calc((2.2rem) + (4.8 - 2.2) * (100vw - 37.5rem) / 106.5),4.8rem);letter-spacing:-.03em;overflow:hidden}
+.footer .plink>span{display:block;transition:transform .35s cubic-bezier(.33,1,.68,1)}
+.footer .plink:hover>span{transform:translateY(-8%)}
+.footer .plink+.plink{border-left:1px solid rgba(250,251,248,.3)}
+.footer .plink svg{width:2.6rem;height:2.6rem;flex:none;color:var(--lime);transition:transform .3s}
+.footer .plink:hover svg{transform:translate(4px,-4px)}
 .footer .secondary{display:flex;align-items:center;justify-content:space-between;padding:2.2rem 2rem 1rem;font-size:1.4rem}
 .footer .secondary .home{color:var(--lime)}
 .footer .secondary .leg{display:flex;gap:2.4rem;color:rgba(250,251,248,.85)}
+.footer .secondary .leg a{transition:color .2s}
+.footer .secondary .leg a:hover{color:var(--lime)}
 .footer .tertiary{display:flex;align-items:center;justify-content:space-between;padding:.6rem 2rem 2rem;font-size:1.3rem;color:rgba(250,251,248,.7)}
 .footer .tertiary .mark{width:5.5rem;height:5.5rem;color:var(--lime)}
 .footer .tertiary .soc{display:flex;gap:1.4rem}
-.footer .tertiary .soc svg{width:2rem;height:2rem;color:#fff}
+.footer .tertiary .soc svg{width:2rem;height:2rem;color:#fff;transition:opacity .2s}
+.footer .tertiary .soc a:hover svg{opacity:.65}
 @media (max-width:63.99em){
   .footer .primary{flex-direction:column}
   .footer .plink{height:auto;padding:1.4rem 1.6rem;font-size:2.6rem}
-  .footer .plink + .plink{border-left:0}
+  .footer .plink+.plink{border-left:0}
 }
 </style>
 </head>
 <body>
 
 <div id="curtain" aria-hidden="true">
-  <svg class="ring" viewBox="0 0 72 72" fill="currentColor"><g class="flower"></g></svg>
-  <div class="word">Breakthrough Energy</div>
+  <div class="pt-wrap"><i class="pt-gl"></i><i class="pt-c"></i><i class="pt-gr"></i></div>
+  <div class="pt-logo"><svg viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width="2.2"><g class="flower"></g></svg></div>
 </div>
 
 <header class="nav" id="nav">
@@ -280,7 +300,9 @@ Energy</div>
 
 <!-- 1 HERO -->
 <section class="hero" id="hero" data-theme="light">
-  <div class="bg"><img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/cc5747ff-83e7-4286-bcba-4bd76525a0b8/hero_0.png?fm=jpg&dpr=1&q=60&w=1300" alt=""></div>
+  <div class="bg">
+    <video src="media/hero.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/cc5747ff-83e7-4286-bcba-4bd76525a0b8/hero_0.png?fm=jpg&dpr=1&q=60&w=1300" autoplay muted loop playsinline></video>
+  </div>
   <div class="inner">
     <h1><span class="line"><i>Empowering innovators</i></span><span class="line"><i>to build the future</i></span><span class="line r"><i>of energy</i></span></h1>
     <p class="sub">Breakthrough Energy is a global platform to accelerate clean energy innovation and build the industries of the future.</p>
@@ -290,213 +312,196 @@ Energy</div>
   </div>
 </section>
 
-<!-- 2 COLLAGE -->
-<section class="collage" id="collage" data-theme="dark">
-  <img class="c1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/1b1eb523-864b-41ec-9312-389050405dc5/green-fields-compressed.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
-  <img class="c2" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/11c68a09-de2a-417c-a0b9-0ba5b0aa7569/mediaswirl-1_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="c4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
-  <img class="c5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8d129a29-de4f-4028-a325-59ae90069bba/Blurry%20Pedestrians.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="c7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/bb76cbc3-bb5f-4270-b312-4c6b05353261/mediaswirl-9_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c8" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/fc15b823-c358-4374-8ddd-ae60e8258582/mediaswirl-6_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c9" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/4a0b1b43-96db-47f3-a1f7-db5b36e90e72/Golden%20Computer%20Chip.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <svg class="rosette" viewBox="0 0 72 72" fill="currentColor"><g class="flower-big"></g></svg>
-</section>
-
-<!-- 2b MANIFESTO (lime + collage + teks) -->
-<section class="collage mlime" id="manifesto" data-theme="dark">
-  <img class="c1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/9ce3dcd3-7851-49e9-b1e8-ba3b4c496d35/mediaswirl-3_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
-  <img class="c4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8d129a29-de4f-4028-a325-59ae90069bba/Blurry%20Pedestrians.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="c7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/11c68a09-de2a-417c-a0b9-0ba5b0aa7569/mediaswirl-1_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <img class="c9" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/59b6a287-771a-49dd-8d33-fcba66d1bbb5/mediaswirl-2_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-  <svg class="lattice mini" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".5" style="position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:min(44vw,54svh);height:min(44vw,54svh);color:rgba(250,251,248,.55)"><g class="flower-big"></g></svg>
-  <p class="mline rv">Breakthrough Energy is a global platform to accelerate clean energy innovation and build the industries of the future.</p>
-</section>
-
-<!-- 3 LIME -->
-<section class="prosper" id="prosper" data-theme="dark">
-  <svg class="lattice" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".45"><g class="flower-big"></g></svg>
-  <h2 class="rv">Energy is prosperity</h2>
-</section>
-
-<!-- 4 GRAPH -->
-<section class="graph" id="graph" data-theme="dark">
-  <div class="eyebrow eyebrow-pos rv">The opportunity ahead</div>
-  <div class="gbox">
-    <div class="limepart"></div>
-    <div class="gtext rv"><div>The world's demand</div><div>for electricity will</div><div>double by 2050.</div><p>Innovation is how we can meet humanity's needs without sacrificing prosperity or planet.</p></div>
-    <div class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
-    <div class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
-    <div class="gmark top"><span><span class="n">51k TWh</span><span class="y">in 2050</span></span></div>
-    <div class="gmark mid"><span><span class="n">27k TWh</span><span class="y">in 2024</span></span></div>
-  </div>
-</section>
-
-<!-- 5 WORDS -->
-<section class="words-sec" id="words" data-theme="dark">
-  <div class="eyebrow eyebrow-pos rv">The opportunity ahead</div>
-  <div class="wframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
-    <div class="wlabels wtypo">
-      <div>Affordable</div>
-      <div>Reliable</div>
-      <div>Clean</div>
+<!-- 2 STAGE1 -->
+<section class="pin" id="stage1" data-theme="dark">
+  <div class="pinned">
+    <div class="s1bg"><i class="s1lime"></i></div>
+    <div class="s1imgs">
+      <img class="i1 sp" data-dx="3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/1b1eb523-864b-41ec-9312-389050405dc5/green-fields-compressed.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="i2 sp" data-dx="-4" data-dy="-7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/11c68a09-de2a-417c-a0b9-0ba5b0aa7569/mediaswirl-1_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i3 sp" data-dx="5" data-dy="-5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+      <img class="i4 sp" data-dx="-3" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="i5 sp" data-dx="6" data-dy="4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8d129a29-de4f-4028-a325-59ae90069bba/Blurry%20Pedestrians.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i6 sp" data-dx="-5" data-dy="-4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+      <img class="i7 sp" data-dx="4" data-dy="7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/bb76cbc3-bb5f-4270-b312-4c6b05353261/mediaswirl-9_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i8 sp" data-dx="-6" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/fc15b823-c358-4374-8ddd-ae60e8258582/mediaswirl-6_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i9 sp" data-dx="5" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/4a0b1b43-96db-47f3-a1f7-db5b36e90e72/Golden%20Computer%20Chip.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
     </div>
-    <div class="wsub wtypo"><span class="lime">En</span>ergy</div>
-    <svg class="plus tl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
-    <svg class="plus br" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
+    <svg class="mark1" viewBox="0 0 72 72" fill="none" stroke="currentColor"><g class="flower-big"></g></svg>
+    <svg class="mark2" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".35"><g class="flower-big"></g></svg>
+    <p class="mline">Breakthrough Energy is a global platform to accelerate clean energy innovation and build the industries of the future.</p>
+    <h2 class="prosph">Energy is prosperity</h2>
   </div>
 </section>
 
-<!-- 6 QUOTE -->
+<!-- 3 GRAPH -->
+<section class="pin" id="graph" data-theme="dark">
+  <div class="pinned">
+    <div class="eyebrow eyebrow-pos" id="graphEyebrow">The opportunity ahead</div>
+    <div class="gbox">
+      <div class="limepart"></div>
+      <div class="gtext"><div>The world's demand</div><div>for electricity will</div><div>double by 2050.</div><p>Innovation is how we can meet humanity's needs without sacrificing prosperity or planet.</p></div>
+      <div class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
+      <div class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
+      <div class="gmark top"><span><span class="n">51k TWh</span><span class="y">in 2050</span></span></div>
+      <div class="gmark mid"><span><span class="n">27k TWh</span><span class="y">in 2024</span></span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 4 WORDS -->
+<section class="pin" id="words" data-theme="dark">
+  <div class="pinned">
+    <div class="eyebrow eyebrow-pos" id="wordsEyebrow">The opportunity ahead</div>
+    <div class="wframe">
+      <img class="wimg" id="wimg1" src="media/words1.webp" alt="">
+      <img class="wimg" id="wimg2" src="media/words2.webp" alt="">
+      <img class="wimg" id="wimg3" src="media/words3.webp" alt="">
+      <div class="wlabels wtypo">
+        <div>Affordable</div>
+        <div>Reliable</div>
+        <div>Clean</div>
+      </div>
+      <div class="wsub wtypo"><span class="lime">En</span>ergy</div>
+      <svg class="plus tl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
+      <svg class="plus br" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- 5 QUOTE -->
 <section class="quote" id="quote" data-theme="light">
-  <div class="bg"><img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/1b1eb523-864b-41ec-9312-389050405dc5/green-fields-compressed.jpg?fm=jpg&dpr=1&q=60&w=1024" alt=""></div>
-  <p class="q rv">When I see a tough problem, my first thought is always &ldquo;<em>how can innovation help solve this?</em>&rdquo; That's why Breakthrough Energy was started &ndash; to bring the power of innovation to bear on the toughest problem humanity has ever faced: climate change.</p>
+  <div class="bg">
+    <video src="media/quote.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/1b1eb523-864b-41ec-9312-389050405dc5/green-fields-compressed.jpg?fm=jpg&dpr=1&q=60&w=1024" autoplay muted loop playsinline></video>
+  </div>
+  <p class="q" id="quoteQ">When I see a tough problem, my first thought is always &ldquo;<em>how can innovation help solve this?</em>&rdquo; That's why Breakthrough Energy was started &ndash; to bring the power of innovation to bear on the toughest problem humanity has ever faced: climate change.</p>
   <div class="bottom">
-    <div class="who rv">Bill Gates<span>Founder<br>Breakthrough Energy</span></div>
-    <div class="card rv">
-      <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/dbb7cba0-714a-4aca-874b-bfe17687a13c/feature_quote_video_thumb.png?fm=jpg&dpr=1&q=60&w=1024" alt="Bill Gates">
+    <div class="who" id="quoteWho">Bill Gates<span>Founder<br>Breakthrough Energy</span></div>
+    <div class="card" id="quoteCard">
+      <video src="media/hero.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/dbb7cba0-714a-4aca-874b-bfe17687a13c/feature_quote_video_thumb.png?fm=jpg&dpr=1&q=60&w=1024" muted loop playsinline preload="metadata"></video>
       <button class="play" aria-label="Open video modal"><svg viewBox="0 0 16 16" fill="currentColor"><path d="M3 1.5v13l11-6.5z"/></svg></button>
     </div>
   </div>
   <svg class="plusc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v18M3 12h18"/></svg>
 </section>
 
-<!-- 7 MISSION -->
+<!-- 6 MISSION -->
 <section class="mission" id="mission" data-theme="light">
-  <p class="txt rv">We work to accelerate progress across every source of emissions, transforming the five sectors of the global economy into <span class="lime">a landscape of opportunity.</span></p>
-  <img class="m1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="m2" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="m3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="m4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-  <img class="m5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <p class="txt" id="missionTxt">We work to accelerate progress across every source of emissions, transforming the five sectors of the global economy into <span class="lime">a landscape of opportunity.</span></p>
+  <img class="m1" data-dy="8" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <img class="m2" data-dy="-7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <img class="m3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <img class="m4" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <img class="m5" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
 </section>
 
-<!-- 8 SECTORS -->
-<section class="sector" id="sec-manufacturing" data-theme="light">
-  <div class="sframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-    <div class="clonetitle">Manufacturing</div>
-    <div class="sinfo">
-      <span class="sbadge">30% emissions</span>
-      <p class="spara">The clean industrial revolution starts with transforming how we make everything in the world&mdash;from steel and cement to everyday materials.</p>
+<!-- 7 SECTORS -->
+<section class="pin" id="sectors" data-theme="light">
+  <div class="pinned">
+    <div class="slayer" data-i="0">
+      <div class="sframe">
+        <video src="media/manufacturing.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" muted loop playsinline preload="auto"></video>
+        <div class="clonetitle">Manufacturing</div>
+        <div class="sinfo">
+          <span class="sbadge">30% emissions</span>
+          <p class="spara">The clean industrial revolution starts with transforming how we make everything in the world&mdash;from steel and cement to everyday materials.</p>
+        </div>
+      </div>
+      <h3 class="stitle">Manufacturing</h3>
+      <button class="spill">29 Manufacturing Companies</button>
     </div>
-  </div>
-  <h3 class="stitle">Manufacturing</h3>
-  <div class="sdots"><b class="on"></b><b></b><b></b><b></b><b></b></div>
-  <button class="spill">29 Manufacturing Companies</button>
-</section>
-
-<section class="sector" id="sec-electricity" data-theme="light">
-  <div class="sframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-    <div class="clonetitle">Electricity</div>
-    <div class="sinfo">
-      <span class="sbadge">28% emissions</span>
-      <p class="spara">The world must build 21st century grids while delivering energy abundance&mdash;clean, affordable, and reliable power for everyone.</p>
+    <div class="slayer" data-i="1">
+      <div class="sframe">
+        <video src="media/electricity.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" muted loop playsinline preload="auto"></video>
+        <div class="clonetitle">Electricity</div>
+        <div class="sinfo">
+          <span class="sbadge">28% emissions</span>
+          <p class="spara">The world must build 21st century grids while delivering energy abundance&mdash;clean, affordable, and reliable power for everyone.</p>
+        </div>
+      </div>
+      <h3 class="stitle">Electricity</h3>
+      <button class="spill">26 Electricity Companies</button>
     </div>
-  </div>
-  <h3 class="stitle">Electricity</h3>
-  <div class="sdots"><b></b><b class="on"></b><b></b><b></b><b></b></div>
-  <button class="spill">26 Electricity Companies</button>
-</section>
-
-<section class="sector" id="sec-agriculture" data-theme="light">
-  <div class="sframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-    <div class="clonetitle">Agriculture</div>
-    <div class="sinfo">
-      <span class="sbadge">19% emissions</span>
-      <p class="spara">From growing rice to raising cattle, innovating how we feed ourselves is a prime opportunity. Meet the innovators who will feed the world for decades to come.</p>
+    <div class="slayer" data-i="2">
+      <div class="sframe">
+        <video src="media/agriculture.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" muted loop playsinline preload="auto"></video>
+        <div class="clonetitle">Agriculture</div>
+        <div class="sinfo">
+          <span class="sbadge">19% emissions</span>
+          <p class="spara">From growing rice to raising cattle, innovating how we feed ourselves is a prime opportunity. Meet the innovators who will feed the world for decades to come.</p>
+        </div>
+      </div>
+      <h3 class="stitle">Agriculture</h3>
+      <button class="spill">20 Agriculture Companies</button>
     </div>
-  </div>
-  <h3 class="stitle">Agriculture</h3>
-  <div class="sdots"><b></b><b></b><b class="on"></b><b></b><b></b></div>
-  <button class="spill">20 Agriculture Companies</button>
-</section>
-
-<section class="sector" id="sec-transportation" data-theme="light">
-  <div class="sframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-    <div class="clonetitle">Transportation</div>
-    <div class="sinfo">
-      <span class="sbadge">16% emissions</span>
-      <p class="spara">Clean ways of getting around are reshaping how we get where we need to go, expanding opportunity in the process.</p>
+    <div class="slayer" data-i="3">
+      <div class="sframe">
+        <video src="media/transportation.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" muted loop playsinline preload="auto"></video>
+        <div class="clonetitle">Transportation</div>
+        <div class="sinfo">
+          <span class="sbadge">16% emissions</span>
+          <p class="spara">Clean ways of getting around are reshaping how we get where we need to go, expanding opportunity in the process.</p>
+        </div>
+      </div>
+      <h3 class="stitle">Transportation</h3>
+      <button class="spill">17 Transportation Companies</button>
     </div>
-  </div>
-  <h3 class="stitle">Transportation</h3>
-  <div class="sdots"><b></b><b></b><b></b><b class="on"></b><b></b></div>
-  <button class="spill">17 Transportation Companies</button>
-</section>
-
-<section class="sector" id="sec-buildings" data-theme="light">
-  <div class="sframe">
-    <img src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-    <div class="clonetitle">Buildings</div>
-    <div class="sinfo">
-      <span class="sbadge">7% emissions</span>
-      <p class="spara">Human comfort is central to human thriving&mdash;we're investing to ensure everyone can keep cool in the summer and warm in the winter, without emissions.</p>
+    <div class="slayer" data-i="4">
+      <div class="sframe">
+        <video src="media/buildings.mp4" poster="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" muted loop playsinline preload="auto"></video>
+        <div class="clonetitle">Buildings</div>
+        <div class="sinfo">
+          <span class="sbadge">7% emissions</span>
+          <p class="spara">Human comfort is central to human thriving&mdash;we're investing to ensure everyone can keep cool in the summer and warm in the winter, without emissions.</p>
+        </div>
+      </div>
+      <h3 class="stitle">Buildings</h3>
+      <button class="spill">11 Building Companies</button>
     </div>
+    <div class="sdots" id="sdots"><b class="on"></b><b></b><b></b><b></b><b></b></div>
   </div>
-  <h3 class="stitle">Buildings</h3>
-  <div class="sdots"><b></b><b></b><b></b><b></b><b class="on"></b></div>
-  <button class="spill">11 Building Companies</button>
 </section>
 
-<!-- 9 INNOVATION -->
+<!-- 8 INNOVATION -->
 <section class="innov" id="innov" data-theme="light">
-  <h2 class="rv">This is <span class="lime">energy innovation</span>
-on a global scale</h2>
-  <button class="pill">Full Portfolio</button>
+  <h2 id="innovH"><span class="line"><span>This is <span class="lime">energy innovation</span></span></span><span class="line"><span>on a global scale</span></span></h2>
+  <button class="pill" id="innovPill">Full Portfolio</button>
 </section>
 
-<!-- 10 APPROACH x3 -->
-<section class="ap" id="ap1" data-theme="dark">
-  <div class="pdots"><b class="on"></b><b></b><b></b></div>
-  <div class="chapter rv">
-    <div>Investing in Opportunity</div>
-    <div class="body">We survey the landscape for white space where we can drive technology discovery and leverage our unique talents to build great companies from the ground up.</div>
+<!-- 9 APPROACH -->
+<section class="pin" id="approach" data-theme="dark">
+  <div class="pinned">
+    <div class="pdots" id="apDots"><b class="on"></b><b></b><b></b></div>
+    <div class="aplayer" data-i="0">
+      <div class="chapter">
+        <div>Investing in Opportunity</div>
+        <div class="body">We survey the landscape for white space where we can drive technology discovery and leverage our unique talents to build great companies from the ground up.</div>
+      </div>
+    </div>
+    <div class="aplayer" data-i="1">
+      <div class="chapter">
+        <div class="body">We partner with the world's leading innovators to turn breakthrough technologies into great businesses.</div>
+      </div>
+    </div>
+    <div class="aplayer" data-i="2">
+      <div class="chapter">
+        <div class="body">Superior performance is our north star&mdash;clean technologies have to be affordable and reliable to reach global scale.</div>
+      </div>
+    </div>
+    <div class="circles" id="apCircles" aria-hidden="true">
+      <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
+      <div class="axis"><span class="lbl">Green Premiums</span></div>
+    </div>
+    <div class="sidetitle" id="apSide"><span class="t">Discover</span><span>+$</span><span>&minus;$</span></div>
   </div>
-  <div class="circles" aria-hidden="true">
-    <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
-    <div class="axis"><span class="lbl">Green Premiums</span></div>
-  </div>
-  <div class="scale"><span>+$</span><span>&minus;</span><span>Discover</span><span>&minus;</span><span>&minus;$</span></div>
 </section>
 
-<section class="ap" id="ap2" data-theme="dark">
-  <div class="pdots"><b></b><b class="on"></b><b></b></div>
-  <div class="chapter rv">
-    <div class="body">We partner with the world's leading innovators to turn breakthrough technologies into great businesses.</div>
-  </div>
-  <div class="circles" aria-hidden="true">
-    <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
-    <div class="axis"><span class="lbl">Green Premiums</span></div>
-  </div>
-  <div class="scale"><span>+$</span><span>&minus;</span><span>Develop</span><span>&minus;</span><span>&minus;$</span></div>
-</section>
-
-<section class="ap" id="ap3" data-theme="dark">
-  <div class="pdots"><b></b><b></b><b class="on"></b></div>
-  <div class="chapter rv">
-    <div class="body">Superior performance is our north star&mdash;clean technologies have to be affordable and reliable to reach global scale.</div>
-  </div>
-  <div class="circles" aria-hidden="true">
-    <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
-    <div class="axis"><span class="lbl">Green Premiums</span></div>
-  </div>
-  <div class="scale"><span>+$</span><span>&minus;</span><span>Deploy</span><span>&minus;</span><span>&minus;$</span></div>
-</section>
-
-<!-- 11 SIGNUP -->
+<!-- 10 SIGNUP -->
 <section class="signup" id="signup" data-theme="light">
   <div class="row">
     <div class="col-l">
-      <h3 class="t-h3 title rv"><span>No Noise.</span><span>Just Breakthroughs.</span></h3>
-      <p class="txt rv">Breaking Through is your shortcut to clean energy innovation. By clicking to subscribe, you agree to receive newsletters that will help you track market moves, portfolio milestones, and leadership perspectives shaping the next wave of breakthroughs.</p>
+      <h3 class="t-h3 title" id="signupTitle"><span><i>No Noise.</i></span><span><i>Just Breakthroughs.</i></span></h3>
+      <p class="txt" id="signupTxt">Breaking Through is your shortcut to clean energy innovation. By clicking to subscribe, you agree to receive newsletters that will help you track market moves, portfolio milestones, and leadership perspectives shaping the next wave of breakthroughs.</p>
     </div>
     <div class="col-r">
       <form onsubmit="event.preventDefault()">
@@ -518,13 +523,13 @@ on a global scale</h2>
   </div>
 </section>
 
-<!-- 12 FOOTER -->
+<!-- 11 FOOTER -->
 <footer class="footer" id="footer" data-theme="light">
   <div class="primary">
-    <a class="plink" href="#">Portfolio <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
-    <a class="plink" href="#">People <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
-    <a class="plink" href="#">Programs <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
-    <a class="plink" href="#">Perspectives <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
+    <a class="plink" href="#"><span>Portfolio</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
+    <a class="plink" href="#"><span>People</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
+    <a class="plink" href="#"><span>Programs</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
+    <a class="plink" href="#"><span>Perspectives</span> <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 18L18 6M8 6h10v10"/></svg></a>
   </div>
   <div class="secondary">
     <a class="home" href="#">Home</a>
@@ -532,26 +537,20 @@ on a global scale</h2>
   </div>
   <div class="tertiary">
     <span>&copy; 2025 Breakthrough Energy, LLC. All Rights Reserved.</span>
-    <svg class="mark" viewBox="0 0 72 72" fill="currentColor"><g class="flower-big"></g></svg>
+    <svg class="mark" viewBox="0 0 72 72" fill="none" stroke="currentColor"><g class="flower-big"></g></svg>
     <span class="soc">
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h5l4.5 6L17 3h4l-7.2 9L21.5 21H16l-4.8-6.4L6 21H2.5l7.6-9.6z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v2H4zM4 8h4v12H4zM10 8h4v2c.8-1.3 2.3-2.2 4-2.2 3.3 0 4 2.4 4 5.4V20h-4v-6c0-1.5-.5-2.6-1.8-2.6-1.5 0-2.2 1-2.2 2.6v6h-4z"/></svg>
-      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-2-.2-3.4-.4-4.2-.2-.8-.7-1.4-1.5-1.6C18.7 5.8 12 5.8 12 5.8s-6.7 0-8.1.4c-.8.2-1.3.8-1.5 1.6C2.2 8.6 2 10 2 12s.2 3.4.4 4.2c.2.8.7 1.4 1.5 1.6 1.4.4 8.1.4 8.1.4s6.7 0 8.1-.4c.8-.2 1.3-.8 1.5-1.6.2-.8.4-2.2.4-4.2zM10 15.2V8.8l5.5 3.2z"/></svg>
+      <a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 3h5l4.5 6L17 3h4l-7.2 9L21.5 21H16l-4.8-6.4L6 21H2.5l7.6-9.6z"/></svg></a>
+      <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4h4v2H4zM4 8h4v12H4zM10 8h4v2c.8-1.3 2.3-2.2 4-2.2 3.3 0 4 2.4 4 5.4V20h-4v-6c0-1.5-.5-2.6-1.8-2.6-1.5 0-2.2 1-2.2 2.6v6h-4z"/></svg></a>
+      <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-2-.2-3.4-.4-4.2-.2-.8-.7-1.4-1.5-1.6C18.7 5.8 12 5.8 12 5.8s-6.7 0-8.1.4c-.8.2-1.3.8-1.5 1.6C2.2 8.6 2 10 2 12s.2 3.4.4 4.2c.2.8.7 1.4 1.5 1.6 1.4.4 8.1.4 8.1.4s6.7 0 8.1-.4c.8-.2 1.3-.8 1.5-1.6.2-.8.4-2.2.4-4.2zM10 15.2V8.8l5.5 3.2z"/></svg></a>
     </span>
   </div>
 </footer>
 
+<script src="libs/gsap.min.js"></script>
+<script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/lenis.min.js"></script>
 <script>
-// flower/rosette: 8 titik cincin + pusat
-function flower(r1, dot){
-  let s = "";
-  for (let i = 0; i < 8; i++){
-    const a = i * Math.PI / 4;
-    s += `<circle cx="${36 + r1 * Math.cos(a)}" cy="${36 + r1 * Math.sin(a)}" r="${dot}"/>`;
-  }
-  s += `<circle cx="36" cy="36" r="${dot * 1.15}"/>`;
-  return s;
-}
+/* ============ flower SVG ============ */
 function flowerBig(){
   let s = '<g fill="none" stroke="currentColor" stroke-width="1.3">';
   for (let i = 0; i < 6; i++){
@@ -560,29 +559,213 @@ function flowerBig(){
   s += '</g>';
   return s;
 }
-document.querySelectorAll(".flower").forEach(g => { g.innerHTML = flowerBig(); g.setAttribute("stroke-width", "2.2"); });
-document.querySelectorAll(".flower-big").forEach(g => g.innerHTML = flowerBig());
+document.querySelectorAll(".flower,.flower-big").forEach(g => { g.innerHTML = flowerBig(); });
 
-// curtain
-function reveal(){
-  document.getElementById("curtain").classList.add("gone");
-  document.getElementById("hero").classList.add("loaded");
+/* ============ words: salinan putih di-clip ke frame (bukti ref: huruf putih di atas gambar) ============ */
+["wlabels","wsub"].forEach(cls => {
+  const el = document.querySelector("." + cls);
+  const c = el.cloneNode(true);
+  c.classList.add(cls + "W");
+  c.setAttribute("aria-hidden","true");
+  el.parentNode.appendChild(c);
+});
+
+/* ============ util: split kata ============ */
+function splitWords(el){
+  const walk = node => {
+    [...node.childNodes].forEach(ch => {
+      if (ch.nodeType === 3){
+        const frag = document.createDocumentFragment();
+        ch.textContent.split(/(\s+)/).forEach(tok => {
+          if (/^\s+$/.test(tok)) frag.appendChild(document.createTextNode(tok));
+          else if (tok){ const s = document.createElement("span"); s.className = "w"; s.textContent = tok; frag.appendChild(s); }
+        });
+        node.replaceChild(frag, ch);
+      } else if (ch.nodeType === 1 && !ch.classList.contains("w")) walk(ch);
+    });
+  };
+  walk(el);
+  return el.querySelectorAll(".w");
 }
-addEventListener("load", () => setTimeout(reveal, 600));
-setTimeout(reveal, 3200);
+const isStatic = location.search.includes("static");
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-// reveal-on-scroll
-const io = new IntersectionObserver(es => es.forEach(e => {
-  if (e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); }
-}), { threshold: .16 });
-document.querySelectorAll(".rv").forEach(el => io.observe(el));
+gsap.registerPlugin(ScrollTrigger);
 
-// graph fill
-new IntersectionObserver((es, o) => es.forEach(e => {
-  if (e.isIntersecting){ e.target.classList.add("in"); o.disconnect(); }
-}), { threshold: .35 }).observe(document.getElementById("graph"));
+/* ============ Lenis smooth scroll ============ */
+let lenis = null;
+if (!isStatic && !reduce){
+  lenis = new Lenis({ duration: 1.1, easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)) });
+  lenis.on("scroll", ScrollTrigger.update);
+  gsap.ticker.add(t => lenis.raf(t * 1000));
+  gsap.ticker.lagSmoothing(0);
+}
 
-// nav theme per section
+/* ============ intro curtain ============ */
+const heroLines = document.querySelectorAll(".hero h1 .line i");
+const intro = gsap.timeline();
+intro
+  .set(".pt-wrap", { x: "-75vw", autoAlpha: 1 }, 0)
+  .fromTo("#curtain .pt-logo svg", { scale: .55, opacity: 0, rotate: -50 },
+          { scale: 1, opacity: 1, rotate: 0, duration: .5, ease: "power3.out" }, 0)
+  .to(".pt-wrap", { x: "-250vw", duration: .8, ease: "power2.inOut" }, .267)
+  .to("#curtain .pt-logo", { opacity: 0, duration: .25, ease: "sine.in" }, .75)
+  .to(heroLines, { y: 0, duration: .7, stagger: .09, ease: "power3.out" }, .95)
+  .to(".hero .sub", { opacity: 1, duration: .5, ease: "sine.out" }, "-=.35")
+  .to(".scrollcue", { opacity: 1, duration: .4, ease: "sine.out" }, "-=.2");
+gsap.to(".scrollcue svg", { y: 4, duration: .8, repeat: -1, yoyo: true, ease: "sine.inOut" });
+if (isStatic || reduce){
+  intro.progress(1);
+  gsap.set(heroLines, { y: 0 });
+  gsap.set([".hero .sub", ".scrollcue"], { opacity: 1 });
+}
+
+/* ============ hero pin (stage menimpanya = wipe up) ============ */
+ScrollTrigger.create({ trigger: "#hero", start: "top top", end: "bottom top", pin: true, pinSpacing: false });
+
+/* ============ STAGE1 scrub ============ */
+const mWords = splitWords(document.querySelector(".mline"));
+const pWords = splitWords(document.querySelector(".prosph"));
+gsap.from("#stage1 .s1imgs img", {
+  scale: .55, transformOrigin: "50% 50%", ease: "none", stagger: .015,
+  scrollTrigger: { trigger: "#stage1", start: "top 85%", end: "top 5%", scrub: .5 }
+});
+const s1tl = gsap.timeline({
+  scrollTrigger: { trigger: "#stage1", start: "top top", end: "bottom bottom", scrub: .6 }
+});
+document.querySelectorAll("#stage1 .sp").forEach(img => {
+  const dx = parseFloat(img.dataset.dx || 0), dy = parseFloat(img.dataset.dy || 0);
+  s1tl.fromTo(img, { xPercent: -dx, yPercent: -dy }, { xPercent: dx, yPercent: dy, ease: "none" }, 0);
+});
+s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .12 }, .30);
+s1tl.to(".mark1", { opacity: 0, scale: .6, ease: "none", duration: .1 }, .30);
+s1tl.to(".mark2", { opacity: 1, ease: "none", duration: .1 }, .34);
+s1tl.to(mWords, { opacity: 1, y: 0, stagger: .012, ease: "none", duration: .18 }, .34);
+s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .64);
+s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .66);
+s1tl.to(pWords, { opacity: 1, y: 0, stagger: .02, ease: "none", duration: .14 }, .76);
+// saat lime masuk: gambar tengah fade (area teks bersih), saat prosperity: semua gambar keluar
+s1tl.to("#stage1 .i2, #stage1 .i3, #stage1 .i6, #stage1 .i9", { autoAlpha: 0, ease: "none", duration: .1 }, .30);
+s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .55);
+
+/* ============ GRAPH scrub ============ */
+const gtl = gsap.timeline({
+  scrollTrigger: { trigger: "#graph", start: "top top", end: "bottom bottom", scrub: .5 }
+});
+gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "32%", ease: "none", duration: .4 }, .05);
+gtl.to(".gtext", { opacity: 0, ease: "none", duration: .12 }, .42);
+gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .5);
+gtl.fromTo(".gmark.mid", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .62);
+gsap.from("#graphEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
+  scrollTrigger: { trigger: "#graph", start: "top 60%" } });
+
+/* ============ WORDS scrub ============ */
+const wtl = gsap.timeline({
+  scrollTrigger: { trigger: "#words", start: "top top", end: "bottom bottom", scrub: .5 }
+});
+wtl.to("#wimg1", { opacity: 1, ease: "none", duration: .08 }, .02);
+wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .10);
+wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .30);
+wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .1 }, .38);
+wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .40);
+wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .42);
+wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .55);
+wtl.to("#wimg2", { opacity: 0, ease: "none", duration: .08 }, .68);
+wtl.to("#wimg3", { opacity: 1, ease: "none", duration: .08 }, .70);
+gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
+  scrollTrigger: { trigger: "#words", start: "top 60%" } });
+
+/* ============ QUOTE reveal ============ */
+gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 65%", end: "top 15%", scrub: .4 } })
+  .to("#quoteQ", { clipPath: "inset(0 0 0% 0)", ease: "none" }, 0);
+gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 45%", end: "top 5%", scrub: .4 } })
+  .to("#quoteWho", { opacity: 1, y: 0, ease: "none" }, 0)
+  .to("#quoteCard", { opacity: 1, y: 0, ease: "none" }, .15);
+
+/* ============ MISSION ============ */
+const missionWs = splitWords(document.querySelector("#missionTxt"));
+gsap.to(missionWs, {
+  opacity: 1, y: 0, stagger: .02, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top 75%", end: "top 25%", scrub: .4 }
+});
+document.querySelectorAll("#mission img").forEach(img => {
+  const dy = parseFloat(img.dataset.dy || 0);
+  gsap.fromTo(img, { yPercent: dy }, { yPercent: -dy, ease: "none",
+    scrollTrigger: { trigger: "#mission", start: "top bottom", end: "bottom top", scrub: .5 } });
+});
+
+/* ============ SECTORS pinned x5 ============ */
+const sLayers = document.querySelectorAll(".slayer");
+const sdots = document.querySelectorAll("#sdots b");
+gsap.set(sLayers[0], { autoAlpha: 1 });
+const secTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#sectors", start: "top top", end: "bottom bottom", scrub: .4,
+    onUpdate: self => {
+      const idx = Math.min(4, Math.floor(self.progress * 5));
+      sdots.forEach((d, i) => d.classList.toggle("on", i === idx));
+    },
+    onToggle: self => {
+      document.querySelectorAll("#sectors video").forEach(v => {
+        if (self.isActive) v.play().catch(() => {});
+        else v.pause();
+      });
+    }
+  }
+});
+sLayers.forEach((L, i) => {
+  const titles = L.querySelectorAll(".stitle, .clonetitle");
+  if (i > 0){
+    secTl.fromTo(L, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: .05 }, i / 5 - .025);
+    secTl.fromTo(titles, { yPercent: 12 }, { yPercent: -8, ease: "none", duration: .1 }, i / 5 - .05);
+  }
+  if (i < 4) secTl.to(L, { autoAlpha: 0, ease: "none", duration: .05 }, (i + 1) / 5 - .025);
+});
+
+/* ============ INNOVATION ============ */
+gsap.timeline({ scrollTrigger: { trigger: "#innov", start: "top 70%", end: "top 20%", scrub: .4 } })
+  .to("#innovH .line > span", { y: 0, ease: "none", stagger: .12 }, 0)
+  .fromTo("#innovPill", { y: 30 }, { opacity: 1, y: 0, ease: "none" }, .3);
+
+/* ============ APPROACH pinned x3 ============ */
+const apLayers = document.querySelectorAll(".aplayer");
+const apDots = document.querySelectorAll("#apDots b");
+const sideT = document.querySelector("#apSide .t");
+const sideNames = ["Discover", "Develop", "Deploy"];
+gsap.set(apLayers[0], { autoAlpha: 1 });
+gsap.fromTo("#apCircles", { scale: .82, yPercent: 8 }, {
+  scale: 1, yPercent: 0, ease: "none",
+  scrollTrigger: { trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .5 }
+});
+const apTl = gsap.timeline({
+  scrollTrigger: {
+    trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .4,
+    onUpdate: self => {
+      const idx = Math.min(2, Math.floor(self.progress * 3));
+      apDots.forEach((d, i) => d.classList.toggle("on", i === idx));
+      if (sideT.textContent !== sideNames[idx]) sideT.textContent = sideNames[idx];
+    }
+  }
+});
+apLayers.forEach((L, i) => {
+  const ch = L.querySelector(".chapter");
+  if (i > 0){
+    apTl.fromTo(L, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: .05 }, i / 3 - .03);
+    apTl.fromTo(ch, { y: 26 }, { y: -10, ease: "none", duration: .12 }, i / 3 - .06);
+  }
+  if (i < 2) apTl.to(L, { autoAlpha: 0, ease: "none", duration: .05 }, (i + 1) / 3 - .03);
+});
+
+/* ============ normalisasi durasi scrub = 1 (posisi anak = fraksi scroll) ============ */
+[s1tl, gtl, wtl, secTl, apTl].forEach(tl => tl.to({v:0}, {v:1, duration:1}, 0));
+
+/* ============ SIGNUP ============ */
+gsap.timeline({ scrollTrigger: { trigger: "#signup", start: "top 75%" } })
+  .to("#signupTitle span i", { y: 0, duration: .6, stagger: .1, ease: "power3.out" }, 0)
+  .to("#signupTxt", { opacity: 1, y: 0, duration: .5, ease: "sine.out" }, .2)
+  .to(".signup .field", { opacity: 1, y: 0, duration: .5, stagger: .1, ease: "sine.out" }, .3);
+
+/* ============ nav ============ */
 const nav = document.getElementById("nav");
 function navCheck(){
   const y = 58;
@@ -597,18 +780,27 @@ function navCheck(){
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
 
-// menu
+/* ============ menu ============ */
 const menu = document.getElementById("menu");
-document.getElementById("burger").onclick = () => { menu.classList.add("open"); menu.setAttribute("aria-hidden","false"); };
-document.getElementById("menuClose").onclick = () => { menu.classList.remove("open"); menu.setAttribute("aria-hidden","true"); };
+document.getElementById("burger").onclick = () => { menu.classList.add("open"); menu.setAttribute("aria-hidden","false"); lenis && lenis.stop(); };
+document.getElementById("menuClose").onclick = () => { menu.classList.remove("open"); menu.setAttribute("aria-hidden","true"); lenis && lenis.start(); };
 
-// capture stabilization
-if (location.search.includes("static")){
-  document.querySelectorAll(".rv").forEach(e => e.classList.add("in"));
-  document.getElementById("graph").classList.add("in");
-  document.getElementById("curtain").classList.add("gone");
-  document.getElementById("hero").classList.add("loaded");
+/* ============ quote card hover ============ */
+const qcardVid = document.querySelector("#quoteCard video");
+if (qcardVid){
+  document.getElementById("quoteCard").addEventListener("mouseenter", () => qcardVid.play().catch(()=>{}));
+  document.getElementById("quoteCard").addEventListener("mouseleave", () => qcardVid.pause());
 }
+
+/* ============ static capture mode ============ */
+if (isStatic){
+  gsap.set("#quoteQ", { clipPath: "inset(0 0 0% 0)" });
+  gsap.set(["#quoteWho", "#quoteCard", "#innovPill", ".signup .field", "#signupTxt"], { opacity: 1, y: 0 });
+  gsap.set("#innovH .line > span", { y: 0 });
+  gsap.set("#signupTitle span i", { y: 0 });
+  document.querySelectorAll("video").forEach(v => v.pause());
+}
+ScrollTrigger.refresh();
 </script>
 </body>
 </html>
