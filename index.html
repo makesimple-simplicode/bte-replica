@@ -714,10 +714,12 @@ wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration
 wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .08 }, .10);
 wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .26);
 wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .28);
-wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .32);
+wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .30);
+wtl.to(".wlabels > div:nth-child(1)", { opacity: 0, ease: "none", duration: .06 }, .34);
 wtl.to("#wimg2", { opacity: 0, ease: "none", duration: .08 }, .58);
 wtl.to("#wimg3", { opacity: 1, ease: "none", duration: .08 }, .60);
-wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .64);
+wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .62);
+wtl.to(".wlabels > div:nth-child(2)", { opacity: 0, ease: "none", duration: .06 }, .66);
 gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#words", start: "top 60%" } });
 
