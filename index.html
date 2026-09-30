@@ -174,7 +174,7 @@ button,input{font:inherit;color:inherit}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
 /* ---------- 6 MISSION ---------- */
-.mission{position:relative;height:120svh;background:#000;color:var(--cream);z-index:1}
+.mission{position:relative;height:100svh;background:#000;color:var(--cream);z-index:1}
 .mission .mstick{position:sticky;top:0;height:100svh;overflow:hidden}
 .mission .txt{position:absolute;left:50%;transform:translateX(-50%);top:calc(50% - 4rem);width:min(94vw,1360px);text-align:left;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.1;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
@@ -739,7 +739,7 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 65%", end: "top 
 gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 35%", end: "top top", scrub: .4 } })
   .to("#quoteWho", { opacity: 1, y: 0, ease: "none" }, 0)
   .to("#quoteCard", { opacity: 1, y: 0, ease: "none" }, .2);
-gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=90%", scrub: .4, pin: true } })
+gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=56%", scrub: .4, pin: true } })
   .to({}, { duration: 1 }, 0);
 
 /* ============ MISSION ============ */
