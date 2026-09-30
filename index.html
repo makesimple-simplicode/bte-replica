@@ -209,7 +209,7 @@ button,input{font:inherit;color:inherit}
 #approach{height:330svh;background:var(--cream);z-index:1}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
 .aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side);z-index:2}
-.aplayer .chapter{width:min(35%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
+.aplayer .chapter{width:min(33.4%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
 .aplayer[data-i="2"] .chapter{margin-left:9.3rem}
 .aplayer .chapter .body{margin-top:1.65em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;color:rgba(18,17,14,.88);white-space:pre-line}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
@@ -217,6 +217,7 @@ button,input{font:inherit;color:inherit}
 .pdots b.on{background:var(--lime)}
 .circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh)}
 .circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
+.circles .o1,.circles .o2,.circles .o3,.circles .o4{bottom:auto;top:50%;transform:translate(-50%,-50%)}
 .circles .o1{width:100%;height:100%;background:var(--lime)}
 .circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
 .circles .o3{width:56%;height:56%;background:rgba(235,245,195,.9)}
@@ -231,7 +232,7 @@ button,input{font:inherit;color:inherit}
 .circles .pt.h{background:#fff;box-shadow:0 0 0 1.5px rgba(18,17,14,.55)}
 .circles .pt.ring{box-shadow:0 0 0 3px #fff,0 0 0 4.5px rgba(18,17,14,.5)}
 #apCircles[data-ch="0"] .axis,#apCircles[data-ch="1"] .axis{opacity:0;transition:opacity .35s}
-.circles .wedge{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 124deg, rgba(223,255,92,.22) 0deg, rgba(223,255,92,.22) 36deg, transparent 36deg);opacity:0;transition:opacity .45s}
+.circles .wedge{position:absolute;inset:0;transform:none;border-radius:50%;background:conic-gradient(from 124deg, rgba(223,255,92,.22) 0deg, rgba(223,255,92,.22) 36deg, transparent 36deg);opacity:0;transition:opacity .45s}
 #apCircles[data-ch="0"] .wedge{opacity:1}
 .circles .pt{width:3.4%;aspect-ratio:1;background:#e8f23a;opacity:0;transition:opacity .35s;transform:none}
 #apCircles .o1,#apCircles .o2,#apCircles .o3,#apCircles .o4{transition:opacity .45s,background .45s,box-shadow .45s}
