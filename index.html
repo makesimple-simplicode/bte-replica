@@ -802,7 +802,7 @@ sLayers.forEach((L, i) => {
   const tOut = sLayers[i - 1].querySelector(".clonetitle");
   const tIn = L.querySelector(".clonetitle");
   secTl.to(tOut, { opacity: 0, duration: .02, ease: "none" }, w);
-  secTl.fromTo(tIn, { opacity: 0 }, { opacity: 1, duration: .03, ease: "none" }, w + .03);
+  secTl.fromTo(tIn, { opacity: 0 }, { opacity: 1, duration: .03, ease: "none" }, w + .05);
   if (i === 1) gsap.set(tIn, { opacity: 0 });
 });
 
