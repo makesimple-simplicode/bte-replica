@@ -121,7 +121,7 @@ button,input{font:inherit;color:inherit}
 .gtext p{margin-top:.6em;font-size:.42em;line-height:1.35;color:rgba(18,17,14,.72);max-width:92%}
 .gmark{position:absolute;left:100%;display:flex;align-items:center;gap:.7rem;white-space:nowrap;opacity:0}
 .gmark::before{content:"";width:2.6rem;height:1px;background:var(--ink)}
-.gmark .n{font-weight:500;font-size:2rem;letter-spacing:-.02em;display:block}
+.gmark .n{font-weight:500;font-size:1.8rem;letter-spacing:-.02em;display:block}
 .gmark .y{font-family:var(--serif);font-size:1.15rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(18,17,14,.75);display:block;margin-top:.2rem}
 .gmark.top{top:6%}
 .gmark.mid{top:68%}
@@ -163,13 +163,13 @@ button,input{font:inherit;color:inherit}
 
 /* ---------- 6 MISSION ---------- */
 .mission{position:relative;height:100svh;background:#000;overflow:hidden;color:var(--cream);z-index:1}
-.mission .txt{position:absolute;left:var(--side);top:34svh;width:min(47%,700px);font-weight:500;font-size:min(calc((1.6rem) + (2.7 - 1.6) * (100vw - 37.5rem) / 106.5),2.7rem);line-height:1.14;letter-spacing:-.02em;z-index:2}
+.mission .txt{position:absolute;left:50%;transform:translateX(-50%);top:calc(50% - 4rem);width:min(94vw,1360px);text-align:left;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
 .mission .txt .w{display:inline-block;opacity:0;transform:translateY(.4em)}
 .mission img{position:absolute;object-fit:cover;box-shadow:0 16px 46px rgba(0,0,0,.5)}
 .mission .m1{width:9%;height:14%;left:6%;top:8%}
 .mission .m2{width:14%;height:19%;right:6%;top:9%}
-.mission .m3{width:15%;height:19%;left:46%;top:38%}
+.mission .m3{width:15%;height:19%;left:46%;top:66%}
 .mission .m4{width:13%;height:18%;right:10%;top:64%}
 .mission .m5{width:11%;height:15%;left:42%;top:74%}
 @media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
