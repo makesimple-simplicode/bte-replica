@@ -86,7 +86,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:430svh;background:var(--cream);z-index:1}
+#stage1{height:505svh;background:var(--cream);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -678,7 +678,7 @@ s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .64);
 s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .66);
 s1tl.to(pWords, { opacity: 1, y: 0, stagger: .02, ease: "none", duration: .14 }, .76);
 // saat lime masuk: gambar tengah fade (area teks bersih), saat prosperity: semua gambar keluar
-s1tl.to("#stage1 .i2, #stage1 .i3, #stage1 .i6, #stage1 .i9", { autoAlpha: 0, ease: "none", duration: .1 }, .30);
+s1tl.to("#stage1 .i2, #stage1 .i3, #stage1 .i6, #stage1 .i9", { autoAlpha: 0, ease: "none", duration: .1 }, .64);
 s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .55);
 
 /* ============ GRAPH scrub ============ */
