@@ -38,7 +38,9 @@ button,input{font:inherit;color:inherit}
 #curtain .pt-logo svg{width:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem);height:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem)}
 
 /* ---------- nav ---------- */
-.nav{position:absolute;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none}
+.nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none;background:var(--cream);transition:background .3s,opacity .35s}
+nav.dark{background:var(--lime)}
+nav.hide{opacity:0;pointer-events:none}
 .nav *{pointer-events:auto}
 .nav .left{font-weight:500;font-size:1.5rem;line-height:1.05;letter-spacing:-.01em;color:var(--cream);white-space:pre-line;transition:opacity .3s}
 .nav.scrolled .left{opacity:0}
@@ -704,7 +706,7 @@ const gtl = gsap.timeline({
 gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .2 }, .05);
 gtl.to(".gbox .gphoto", { height: "30%", ease: "none", duration: .2 }, .55);
 gtl.to(".gbox .limepart", { bottom: "30%", height: "45%", ease: "none", duration: .2 }, .55);
-gtl.to(".gtext p", { fontSize: "6cqw", ease: "none", duration: .2 }, .55);
+gtl.to(".gtext p", { fontSize: "5.8cqw", ease: "none", duration: .2 }, .55);
 gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .65);
 gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .70);
 gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .10);
@@ -848,6 +850,8 @@ function navCheck(){
   });
   nav.classList.toggle("dark", light);
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
+  const gStart = document.getElementById("graph").offsetTop;
+  nav.classList.toggle("hide", scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5);
 }
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
