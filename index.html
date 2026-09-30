@@ -135,7 +135,7 @@ button,input{font:inherit;color:inherit}
 .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
 /* ---------- 4 WORDS ---------- */
-#words{height:238svh;background:var(--cream);z-index:1}
+#words{height:140svh;background:var(--cream);z-index:1}
 #words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
 .wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:59.67svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
 .wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
@@ -715,14 +715,11 @@ const wtl = gsap.timeline({
 wtl.to("#wimg1", { opacity: 1, ease: "none", duration: .06 }, .02);
 wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .06);
 wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .08 }, .10);
-wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .28);
-wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .30);
+wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .75);
+wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .78);
 wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .06);
-wtl.to(".wlabels > div:nth-child(1)", { opacity: 0, ease: "none", duration: .06 }, .30);
-wtl.to("#wimg2", { opacity: 0, ease: "none", duration: .08 }, .62);
-wtl.to("#wimg3", { opacity: 1, ease: "none", duration: .08 }, .64);
-wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .50);
-wtl.to(".wlabels > div:nth-child(2)", { opacity: 0, ease: "none", duration: .06 }, .97);
+wtl.to(".wlabels > div:nth-child(1)", { opacity: 0, ease: "none", duration: .06 }, .80);
+wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .85);
 gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#words", start: "top 60%" } });
 
