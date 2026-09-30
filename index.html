@@ -162,7 +162,8 @@ button,input{font:inherit;color:inherit}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
 /* ---------- 6 MISSION ---------- */
-.mission{position:relative;height:100svh;background:#000;overflow:hidden;color:var(--cream);z-index:1}
+.mission{position:relative;height:130svh;background:#000;color:var(--cream);z-index:1}
+.mission .mstick{position:sticky;top:0;height:100svh;overflow:hidden}
 .mission .txt{position:absolute;left:50%;transform:translateX(-50%);top:calc(50% - 4rem);width:min(94vw,1360px);text-align:left;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
 .mission .txt .w{display:inline-block;opacity:0;transform:translateY(.4em)}
@@ -402,12 +403,14 @@ Energy</div>
 
 <!-- 6 MISSION -->
 <section class="mission" id="mission" data-theme="light">
+  <div class="mstick">
   <p class="txt" id="missionTxt">We work to accelerate progress across every source of emissions, transforming the five sectors of the global economy into <span class="lime">a landscape of opportunity.</span></p>
   <img class="m1" data-dy="8" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m2" data-dy="-7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m4" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m5" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  </div>
 </section>
 
 <!-- 7 SECTORS -->
@@ -703,14 +706,15 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 45%", end: "top 
 
 /* ============ MISSION ============ */
 const missionWs = splitWords(document.querySelector("#missionTxt"));
+// trigger elemen teks: reveal terlihat selama teks masuk viewport (ref: partial lalu full)
 gsap.to(missionWs, {
   opacity: 1, y: 0, stagger: .02, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 70%", end: "top 10%", scrub: .4 }
+  scrollTrigger: { trigger: "#missionTxt", start: "top 95%", end: "top 45%", scrub: .4 }
 });
-// thumbnails slide-in bertahap (ref: tiles masuk satu per satu selama transisi)
+// thumbnails slide-in selama mission masuk (ref: tiles satu per satu)
 gsap.from("#mission img", {
   autoAlpha: 0, y: 130, stagger: .1, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 65%", end: "top 8%", scrub: .4 }
+  scrollTrigger: { trigger: "#mission", start: "top 50%", end: "top 0%", scrub: .4 }
 });
 document.querySelectorAll("#mission img").forEach(img => {
   const dy = parseFloat(img.dataset.dy || 0);
