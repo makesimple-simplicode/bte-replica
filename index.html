@@ -354,9 +354,9 @@ Energy</div>
   <div class="pinned">
     <div class="eyebrow eyebrow-pos" id="wordsEyebrow">The opportunity ahead</div>
     <div class="wframe">
-      <img class="wimg" id="wimg1" src="media/words1.webp" alt="">
-      <img class="wimg" id="wimg2" src="media/words2.webp" alt="">
-      <img class="wimg" id="wimg3" src="media/words3.webp" alt="">
+      <img class="wimg" id="wimg1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="wimg" id="wimg2" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="wimg" id="wimg3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8bec8140-d4f5-4949-80d6-544136ca4a58/clean-energy-2.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
       <div class="wlabels wtypo">
         <div>Affordable</div>
         <div>Reliable</div>
@@ -663,15 +663,15 @@ gsap.from("#graphEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
 const wtl = gsap.timeline({
   scrollTrigger: { trigger: "#words", start: "top top", end: "bottom bottom", scrub: .5 }
 });
-wtl.to("#wimg1", { opacity: 1, ease: "none", duration: .08 }, .02);
-wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .10);
-wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .30);
-wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .1 }, .38);
-wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .40);
-wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .42);
-wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .1 }, .55);
-wtl.to("#wimg2", { opacity: 0, ease: "none", duration: .08 }, .68);
-wtl.to("#wimg3", { opacity: 1, ease: "none", duration: .08 }, .70);
+wtl.to("#wimg1", { opacity: 1, ease: "none", duration: .06 }, .02);
+wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .06);
+wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .08 }, .10);
+wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .26);
+wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .28);
+wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .32);
+wtl.to("#wimg2", { opacity: 0, ease: "none", duration: .08 }, .58);
+wtl.to("#wimg3", { opacity: 1, ease: "none", duration: .08 }, .60);
+wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .64);
 gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#words", start: "top 60%" } });
 
