@@ -791,7 +791,7 @@ const apTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .4,
     onUpdate: self => {
-      const idx = Math.min(2, Math.floor(self.progress * 3));
+      const idx = Math.min(2, Math.floor(self.progress * 2.5));
       apDots.forEach((d, i) => d.classList.toggle("on", i === idx));
       if (sideT.textContent !== sideNames[idx]) sideT.textContent = sideNames[idx];
       const ch = String(idx);
@@ -800,11 +800,12 @@ const apTl = gsap.timeline({
   }
 });
 // crossfade chapter (sama dgn ref: teks fade in/out, bukan geser pita)
+const apTh = [.4, .8];
 apLayers.forEach((L, i) => {
-  if (i === 0) apTl.to(L, { yPercent: -100, ease: "none", duration: .08 }, 1 / 3 - .04);
+  if (i === 0) apTl.to(L, { yPercent: -100, ease: "none", duration: .08 }, apTh[0] - .04);
   else {
-    apTl.fromTo(L, { yPercent: 100, autoAlpha: 1 }, { yPercent: 0, ease: "none", duration: .08 }, i / 3 - .04);
-    if (i < apLayers.length - 1) apTl.to(L, { yPercent: -100, ease: "none", duration: .08 }, (i + 1) / 3 - .04);
+    apTl.fromTo(L, { yPercent: 100, autoAlpha: 1 }, { yPercent: 0, ease: "none", duration: .08 }, apTh[i - 1] - .04);
+    if (i < apLayers.length - 1) apTl.to(L, { yPercent: -100, ease: "none", duration: .08 }, apTh[i] - .04);
   }
 });
 
