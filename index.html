@@ -86,7 +86,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:505svh;background:var(--cream);z-index:1}
+#stage1{height:465svh;background:var(--cream);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -685,7 +685,7 @@ document.querySelectorAll("#stage1 .sp").forEach(img => {
 s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .07 }, .26);
 s1tl.to(".mark1", { opacity: 0, scale: .6, ease: "none", duration: .06 }, .28);
 s1tl.to(".mark2", { opacity: .45, ease: "none", duration: .08 }, .28);
-s1tl.to(mWords, { opacity: 1, y: 0, stagger: .007, ease: "none", duration: .1 }, .38);
+s1tl.to(mWords, { opacity: 1, y: 0, stagger: .007, ease: "none", duration: .1 }, .44);
 s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .74);
 s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .76);
 s1tl.to(pWords, { opacity: 1, y: 0, stagger: .02, ease: "none", duration: .14 }, .76);
