@@ -174,7 +174,7 @@ button,input{font:inherit;color:inherit}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
 /* ---------- 6 MISSION ---------- */
-.mission{position:relative;height:100svh;background:#000;color:var(--cream);z-index:1}
+.mission{position:relative;height:156svh;background:#000;color:var(--cream);z-index:1}
 .mission .mstick{position:sticky;top:0;height:100svh;overflow:hidden}
 .mission .txt{position:absolute;left:50%;transform:translateX(-50%);top:calc(50% - 4rem);width:min(94vw,1360px);text-align:left;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.1;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
@@ -190,13 +190,13 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
 
 /* ---------- 7 SECTORS (pinned x5) ---------- */
-#sectors{height:550svh;background:#000;z-index:1}
+#sectors{height:620svh;background:#000;z-index:1}
 #sectors .pinned{background:#000}
 .slayer{position:absolute;inset:0}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 2svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:65svh;overflow:hidden;z-index:2}
 .slayer .sframe video,.slayer .sframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stitle{position:absolute;left:0;top:calc(50% - 27.8svh);width:100%;text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
-.sframe .clonetitle{position:absolute;left:50%;top:0;width:100vw;transform:translate(-50%,-45%);text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
+.sframe .clonetitle{position:absolute;left:0;top:0;width:100vw;transform:translate(0,-45%);text-align:left;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
 .sinfo{position:absolute;left:2.4rem;bottom:1.4rem;max-width:64%;z-index:4;text-align:left}
 .sbadge{display:inline-block;border:1px solid #FAFBF8;border-radius:1em;padding:.18em .65em .2em;font-size:max(13px,1vw);font-family:var(--sans);font-weight:500;letter-spacing:0;margin-bottom:1vw;background:transparent}
 .spara{font-size:min(calc((1.4rem) + (2 - 1.4) * (100vw - 37.5rem) / 106.5),2rem);line-height:min(calc((1.16em) + (1.2 - 1.16) * (100vw - 37.5rem) / 106.5),1.2em);letter-spacing:0;font-weight:500;color:#fafbf8;text-shadow:0 1px .8rem rgba(0,0,0,.55);max-width:44rem}
@@ -739,7 +739,7 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 65%", end: "top 
 gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 35%", end: "top top", scrub: .4 } })
   .to("#quoteWho", { opacity: 1, y: 0, ease: "none" }, 0)
   .to("#quoteCard", { opacity: 1, y: 0, ease: "none" }, .2);
-gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=56%", scrub: .4, pin: true } })
+gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=90%", scrub: .4, pin: true } })
   .to({}, { duration: 1 }, 0);
 
 /* ============ MISSION ============ */
@@ -850,7 +850,11 @@ function navCheck(){
   nav.classList.toggle("dark", g.top <= y && g.bottom >= y && gp < .55);
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
   const gStart = document.getElementById("graph").offsetTop;
-  nav.classList.toggle("hide", scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5);
+  const mStart = document.getElementById("mission").offsetTop;
+  const iStart = document.getElementById("innov").offsetTop;
+  const stage1Hide = scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5;
+  const darkHide = scrollY >= mStart - 100 && scrollY < iStart - 100;
+  nav.classList.toggle("hide", stage1Hide || darkHide);
 }
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
