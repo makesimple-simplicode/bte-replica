@@ -670,16 +670,16 @@ document.querySelectorAll("#stage1 .sp").forEach(img => {
   const dx = parseFloat(img.dataset.dx || 0), dy = parseFloat(img.dataset.dy || 0);
   s1tl.fromTo(img, { xPercent: -dx, yPercent: -dy }, { xPercent: dx, yPercent: dy, ease: "none" }, 0);
 });
-s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .12 }, .30);
+s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .07 }, .30);
 s1tl.to(".mark1", { opacity: 0, scale: .6, ease: "none", duration: .1 }, .30);
 s1tl.to(".mark2", { opacity: 1, ease: "none", duration: .1 }, .34);
 s1tl.to(mWords, { opacity: 1, y: 0, stagger: .012, ease: "none", duration: .18 }, .34);
-s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .64);
-s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .66);
+s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .74);
+s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .76);
 s1tl.to(pWords, { opacity: 1, y: 0, stagger: .02, ease: "none", duration: .14 }, .76);
 // saat lime masuk: gambar tengah fade (area teks bersih), saat prosperity: semua gambar keluar
-s1tl.to("#stage1 .i2, #stage1 .i3, #stage1 .i6, #stage1 .i9", { autoAlpha: 0, ease: "none", duration: .1 }, .64);
-s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .55);
+s1tl.to("#stage1 .i2, #stage1 .i3, #stage1 .i6, #stage1 .i9", { autoAlpha: 0, ease: "none", duration: .1 }, .80);
+s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .80);
 
 /* ============ GRAPH scrub ============ */
 const gtl = gsap.timeline({
