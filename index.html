@@ -115,7 +115,8 @@ button,input{font:inherit;color:inherit}
 .prosph .w{display:inline-block;opacity:0;transform:translateY(.5em)}
 
 /* ---------- 3 GRAPH ---------- */
-#graph{height:222svh;background:var(--cream);z-index:1}
+#graph{height:312svh;background:var(--cream);z-index:1}
+#graph .pinned{z-index:3}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
 .gbox .gphoto{position:absolute;left:0;right:0;bottom:0;height:0;object-fit:cover;z-index:1}
@@ -135,7 +136,7 @@ button,input{font:inherit;color:inherit}
 .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
 /* ---------- 4 WORDS ---------- */
-#words{height:231svh;background:var(--cream);z-index:1}
+#words{height:231svh;margin-top:-800px;background:var(--cream);z-index:1}
 #words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
 .wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:59.67svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
 .wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
@@ -701,10 +702,10 @@ const gtl = gsap.timeline({
 gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .2 }, .05);
 gtl.to(".gbox .gphoto", { height: "35%", ease: "none", duration: .2 }, .55);
 gtl.to(".gbox .limepart", { bottom: "35%", height: "40%", ease: "none", duration: .2 }, .55);
-gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .75);
-gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .8);
-gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .15);
-gtl.fromTo(".gmark.mid", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .25);
+gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .65);
+gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .70);
+gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .10);
+gtl.fromTo(".gmark.mid", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .18);
 gsap.from("#graphEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#graph", start: "top 60%" } });
 
