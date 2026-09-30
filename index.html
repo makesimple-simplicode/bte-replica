@@ -693,13 +693,13 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 45%", end: "top 
 /* ============ MISSION ============ */
 const missionWs = splitWords(document.querySelector("#missionTxt"));
 gsap.to(missionWs, {
-  opacity: 1, y: 0, stagger: .018, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 55%", end: "top 5%", scrub: .4 }
+  opacity: 1, y: 0, stagger: .02, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top 70%", end: "top 10%", scrub: .4 }
 });
-// thumbnails slide-in bertahap (ref: tiles masuk satu per satu dari arah berbeda)
+// thumbnails slide-in bertahap (ref: tiles masuk satu per satu selama transisi)
 gsap.from("#mission img", {
-  autoAlpha: 0, y: 60, stagger: .12, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 60%", end: "top 12%", scrub: .4 }
+  autoAlpha: 0, y: 130, stagger: .1, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top 65%", end: "top 8%", scrub: .4 }
 });
 document.querySelectorAll("#mission img").forEach(img => {
   const dy = parseFloat(img.dataset.dy || 0);
