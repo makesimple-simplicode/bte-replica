@@ -86,7 +86,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:465svh;background:var(--cream);z-index:1}
+#stage1{height:431svh;background:var(--cream);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -118,7 +118,8 @@ button,input{font:inherit;color:inherit}
 #graph{height:220svh;background:var(--cream);z-index:1}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
-.gbox .limepart{position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime);overflow:hidden}
+.gbox .gphoto{position:absolute;left:0;right:0;bottom:0;height:0;object-fit:cover;z-index:1}
+.gbox .limepart{z-index:2;position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime);overflow:hidden}
 .gbox .corner{position:absolute;width:2.8rem;height:2.8rem;color:var(--ink)}
 .gbox .corner.tl{left:-1.4rem;top:-1.4rem}
 .gbox .corner.br{right:-1.4rem;bottom:-1.4rem}
@@ -379,7 +380,7 @@ Energy</div>
   <div class="pinned">
     <div class="eyebrow eyebrow-pos" id="graphEyebrow">The opportunity ahead</div>
     <div class="gbox">
-      <div class="limepart"><div class="gtext"><div>The world's demand</div><div>for electricity will</div><div>double by 2050.</div><p>Innovation is how we can meet humanity's needs without sacrificing prosperity or planet.</p></div></div>
+      <img class="gphoto" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt=""><div class="limepart"><div class="gtext"><div>The world's demand</div><div>for electricity will</div><div>double by 2050.</div><p>Innovation is how we can meet humanity's needs without sacrificing prosperity or planet.</p></div></div>
       <div class="corner tl"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
       <div class="corner br"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 0v24M0 12h24"/></svg></div>
       <div class="gmark top"><span><span class="n">51k TWh</span><span class="y">in 2050</span></span></div>
@@ -393,9 +394,9 @@ Energy</div>
   <div class="pinned">
     <div class="eyebrow eyebrow-pos" id="wordsEyebrow">The opportunity ahead</div>
     <div class="wframe">
-      <img class="wimg" id="wimg1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="wimg" id="wimg1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8bec8140-d4f5-4949-80d6-544136ca4a58/clean-energy-2.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
       <img class="wimg" id="wimg2" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
-      <img class="wimg" id="wimg3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8bec8140-d4f5-4949-80d6-544136ca4a58/clean-energy-2.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="wimg" id="wimg3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
       <div class="wlabels wtypo">
         <div>Affordable</div>
         <div>Reliable</div>
@@ -698,6 +699,8 @@ const gtl = gsap.timeline({
   scrollTrigger: { trigger: "#graph", start: "top top", end: "bottom bottom", scrub: .5 }
 });
 gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .2 }, .05);
+gtl.to(".gbox .gphoto", { height: "35%", ease: "none", duration: .2 }, .55);
+gtl.to(".gbox .limepart", { bottom: "35%", height: "40%", ease: "none", duration: .2 }, .55);
 gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .75);
 gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .8);
 gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .5);
