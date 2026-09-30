@@ -38,7 +38,7 @@ button,input{font:inherit;color:inherit}
 #curtain .pt-logo svg{width:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem);height:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem)}
 
 /* ---------- nav ---------- */
-.nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none}
+.nav{position:absolute;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none}
 .nav *{pointer-events:auto}
 .nav .left{font-weight:500;font-size:1.5rem;line-height:1.05;letter-spacing:-.01em;color:var(--cream);white-space:pre-line;transition:opacity .3s}
 .nav.scrolled .left{opacity:0}
@@ -86,21 +86,21 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:400svh;background:var(--cream);z-index:1}
+#stage1{height:430svh;background:var(--cream);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
 .s1imgs{position:absolute;inset:0}
 .s1imgs img{position:absolute;object-fit:cover;box-shadow:0 14px 40px rgba(18,17,14,.14)}
-.i1{width:16%;height:33%;left:0;top:0}
-.i2{width:22%;height:18%;left:20%;top:36%}
-.i3{width:14%;height:30%;left:41%;top:16%}
-.i4{width:15%;height:24%;left:6%;top:57%}
-.i5{width:13%;height:26%;left:23%;top:64%}
-.i6{width:17%;height:15%;left:39%;top:76%}
-.i7{width:18%;height:20%;right:4%;top:8%}
-.i8{width:20%;height:24%;right:2%;top:57%}
-.i9{width:12%;height:16%;right:24%;top:70%}
+.i1{width:14.4%;height:17%;left:11.5%;top:6.6%}
+.i2{width:15.8%;height:20%;left:25.5%;top:-7%}
+.i3{width:10.7%;height:13%;left:49%;top:-1.3%}
+.i4{width:17.8%;height:22%;left:64.7%;top:-3.7%}
+.i5{width:7.8%;height:17%;left:78.5%;top:13.7%}
+.i6{width:9.7%;height:14%;left:87.4%;top:29.4%}
+.i7{width:14.5%;height:21%;left:87.2%;top:43.5%}
+.i8{width:10.6%;height:16%;left:79.7%;top:59.5%}
+.i9{width:13%;height:16%;left:5%;top:72%}
 .mark1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,42vh);height:min(22vw,42vh);color:var(--lime)}
 .mark2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(40vw,50svh);height:min(40vw,50svh);color:rgba(250,251,248,.7);opacity:0}
 .mline{position:absolute;left:50%;top:56%;transform:translate(-50%,-50%);width:min(64%,1000px);text-align:center;font-weight:500;font-size:min(calc((2.4rem) + (4.2 - 2.4) * (100vw - 37.5rem) / 106.5),4.2rem);letter-spacing:-.02em;line-height:1.2;color:var(--ink);z-index:3}
@@ -345,15 +345,15 @@ Energy</div>
   <div class="pinned">
     <div class="s1bg"><i class="s1lime"></i></div>
     <div class="s1imgs">
-      <img class="i1 sp" data-dx="3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/1b1eb523-864b-41ec-9312-389050405dc5/green-fields-compressed.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
-      <img class="i2 sp" data-dx="-4" data-dy="-7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/11c68a09-de2a-417c-a0b9-0ba5b0aa7569/mediaswirl-1_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-      <img class="i3 sp" data-dx="5" data-dy="-5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a6dc744b-d81a-41b9-8f34-de9c71572131/electricity_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-      <img class="i4 sp" data-dx="-3" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      <img class="i1 sp" data-dx="3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/11c68a09-de2a-417c-a0b9-0ba5b0aa7569/mediaswirl-1_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i2 sp" data-dx="-4" data-dy="-7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/4a0b1b43-96db-47f3-a1f7-db5b36e90e72/Golden%20Computer%20Chip.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i3 sp" data-dx="5" data-dy="-5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/6018a519-607b-4d12-9447-8e26b3f37880/mediaswirl-3_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i4 sp" data-dx="-3" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/9cdc955e-f32d-41cf-86d3-554d68e85ed0/mediaswirl-4_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
       <img class="i5 sp" data-dx="6" data-dy="4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8d129a29-de4f-4028-a325-59ae90069bba/Blurry%20Pedestrians.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
-      <img class="i6 sp" data-dx="-5" data-dy="-4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
-      <img class="i7 sp" data-dx="4" data-dy="7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/bb76cbc3-bb5f-4270-b312-4c6b05353261/mediaswirl-9_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-      <img class="i8 sp" data-dx="-6" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/fc15b823-c358-4374-8ddd-ae60e8258582/mediaswirl-6_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
-      <img class="i9 sp" data-dx="5" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/4a0b1b43-96db-47f3-a1f7-db5b36e90e72/Golden%20Computer%20Chip.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i6 sp" data-dx="-5" data-dy="-4" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/fc15b823-c358-4374-8ddd-ae60e8258582/mediaswirl-6_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i7 sp" data-dx="4" data-dy="7" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/ac04b0e2-5764-4780-8f01-5c9d23c7c828/mediaswirl-7_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i8 sp" data-dx="-6" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/782989ed-ab54-4478-998c-533f4382b053/mediaswirl-8_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
+      <img class="i9 sp" data-dx="5" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/e1a696de-3ce8-49a9-a8c0-8afc2aa20a14/mediaswirl-10_2x.webp?fm=jpg&dpr=1&q=60&w=700" alt="">
     </div>
     <svg class="mark1" viewBox="0 0 72 72" fill="none" stroke="currentColor"><g class="flower-big"></g></svg>
     <svg class="mark2" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".35"><g class="flower-big"></g></svg>
