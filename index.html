@@ -121,7 +121,7 @@ button,input{font:inherit;color:inherit}
 #graph .pinned{z-index:3;background:var(--cream)}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
-.gbox .gphoto{position:absolute;left:0;width:100%;bottom:0;height:0;object-fit:cover;z-index:1}
+.gbox .gphoto{position:absolute;left:0;width:100%;bottom:0;height:0;object-fit:cover;object-position:center 74%;z-index:1}
 .gbox .limepart{z-index:2;position:absolute;left:0;right:0;bottom:0;height:0;background:var(--lime);overflow:hidden}
 .gbox .corner{position:absolute;width:2.8rem;height:2.8rem;color:var(--ink)}
 .gbox .corner.tl{left:-1.4rem;top:-1.4rem}
@@ -157,7 +157,8 @@ button,input{font:inherit;color:inherit}
 
 /* ---------- 5 QUOTE ---------- */
 .quote{position:relative;height:100svh;overflow:hidden;color:var(--cream);z-index:1}
-.quote .bg{position:absolute;inset:0}
+.quote .bg{position:absolute;inset:0;overflow:hidden}
+.quote .bg img{transform:scaleY(1.9);transform-origin:center bottom}
 .quote .bg video,.quote .bg img{width:100%;height:100%;object-fit:cover}
 .quote .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,14,10,.3),rgba(10,14,10,.05) 40%,rgba(10,14,10,.38))}
 .quote .q{position:absolute;top:14svh;right:var(--side);width:min(58%,860px);text-align:right;font-weight:500;font-size:min(calc((1.6rem) + (2.4 - 1.6) * (100vw - 37.5rem) / 106.5),2.4rem);letter-spacing:-.01em;line-height:1.1;font-kerning:none;clip-path:inset(0 0 100% 0)}
