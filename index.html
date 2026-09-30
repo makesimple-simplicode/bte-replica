@@ -177,7 +177,7 @@ button,input{font:inherit;color:inherit}
 /* ---------- 7 SECTORS (pinned x5) ---------- */
 #sectors{height:550svh;background:#000;z-index:1}
 #sectors .pinned{background:#000}
-.slayer{position:absolute;inset:0;visibility:hidden}
+.slayer{position:absolute;inset:0}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 3svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:62svh;overflow:hidden;z-index:2}
 .slayer .sframe video,.slayer .sframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stitle{position:absolute;left:0;top:calc(50% - 31svh);width:100%;text-align:center;font-weight:700;font-size:min(11vw,15svh);line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
@@ -204,13 +204,13 @@ button,input{font:inherit;color:inherit}
 /* ---------- 9 APPROACH (pinned x3) ---------- */
 #approach{height:330svh;background:var(--cream);z-index:1}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
-.aplayer{position:absolute;inset:0;z-index:2;visibility:hidden;display:flex;align-items:center;padding:0 var(--side)}
+.aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side)}
 .aplayer .chapter{width:min(34%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
 .aplayer .chapter .body{margin-top:.7em;font-size:1.7rem;line-height:1.44;font-weight:400;color:rgba(128,128,128,.95);text-wrap:balance}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
 .pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45);transition:background .2s}
 .pdots b.on{background:var(--lime)}
-.circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh);z-index:1}
+.circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh)}
 .circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
 .circles .o1{width:100%;height:100%;background:var(--lime)}
 .circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
@@ -697,12 +697,12 @@ document.querySelectorAll("#mission img").forEach(img => {
 /* ============ SECTORS pinned x5 ============ */
 const sLayers = document.querySelectorAll(".slayer");
 const sdots = document.querySelectorAll("#sdots b");
-gsap.set(sLayers[0], { autoAlpha: 1 });
+gsap.set(sLayers, { autoAlpha: 1 });
 const secTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#sectors", start: "top top", end: "bottom bottom", scrub: .4,
     onUpdate: self => {
-      const idx = Math.min(4, Math.floor(self.progress * 5));
+      const idx = Math.min(4, Math.round(self.progress * 5));
       sdots.forEach((d, i) => d.classList.toggle("on", i === idx));
     },
     onToggle: self => {
@@ -713,13 +713,9 @@ const secTl = gsap.timeline({
     }
   }
 });
+// filmstrip: semua layer satu pita, digeser vertikal (bukti ref: HomeAnimation-landscape-sticky)
 sLayers.forEach((L, i) => {
-  const titles = L.querySelectorAll(".stitle, .clonetitle");
-  if (i > 0){
-    secTl.fromTo(L, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: .05 }, i / 5 - .025);
-    secTl.fromTo(titles, { yPercent: 12 }, { yPercent: -8, ease: "none", duration: .1 }, i / 5 - .05);
-  }
-  if (i < 4) secTl.to(L, { autoAlpha: 0, ease: "none", duration: .05 }, (i + 1) / 5 - .025);
+  secTl.fromTo(L, { yPercent: i * 100 }, { yPercent: (i - 5) * 100, ease: "none", duration: 1 }, 0);
 });
 
 /* ============ INNOVATION ============ */
@@ -732,7 +728,7 @@ const apLayers = document.querySelectorAll(".aplayer");
 const apDots = document.querySelectorAll("#apDots b");
 const sideT = document.querySelector("#apSide .t");
 const sideNames = ["Discover", "Develop", "Deploy"];
-gsap.set(apLayers[0], { autoAlpha: 1 });
+gsap.set(apLayers, { autoAlpha: 1 });
 gsap.fromTo("#apCircles", { scale: .82, yPercent: 8 }, {
   scale: 1, yPercent: 0, ease: "none",
   scrollTrigger: { trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .5 }
@@ -741,19 +737,14 @@ const apTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .4,
     onUpdate: self => {
-      const idx = Math.min(2, Math.floor(self.progress * 3));
+      const idx = Math.min(2, Math.round(self.progress * 3));
       apDots.forEach((d, i) => d.classList.toggle("on", i === idx));
       if (sideT.textContent !== sideNames[idx]) sideT.textContent = sideNames[idx];
     }
   }
 });
 apLayers.forEach((L, i) => {
-  const ch = L.querySelector(".chapter");
-  if (i > 0){
-    apTl.fromTo(L, { autoAlpha: 0 }, { autoAlpha: 1, ease: "none", duration: .05 }, i / 3 - .03);
-    apTl.fromTo(ch, { y: 26 }, { y: -10, ease: "none", duration: .12 }, i / 3 - .06);
-  }
-  if (i < 2) apTl.to(L, { autoAlpha: 0, ease: "none", duration: .05 }, (i + 1) / 3 - .03);
+  apTl.fromTo(L, { yPercent: i * 100 }, { yPercent: (i - 3) * 100, ease: "none", duration: 1 }, 0);
 });
 
 /* ============ normalisasi durasi scrub = 1 (posisi anak = fraksi scroll) ============ */
