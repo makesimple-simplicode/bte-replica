@@ -169,11 +169,12 @@ button,input{font:inherit;color:inherit}
 .mission .txt .ml{display:block;opacity:0;transform:translateY(.4em)}
 .mission .txt .lime{color:#dfff5c}
 .mission img{position:absolute;object-fit:cover;box-shadow:0 16px 46px rgba(0,0,0,.5)}
-.mission .m1{width:9%;height:14%;left:6%;top:8%}
-.mission .m2{width:14%;height:19%;right:6%;top:9%}
-.mission .m3{width:15%;height:19%;left:46%;top:66%}
-.mission .m4{width:13%;height:18%;right:10%;top:64%}
-.mission .m5{width:11%;height:15%;left:42%;top:74%}
+.mission .m1{width:9.58%;height:9.79%;left:35.76%;top:13.72%}
+.mission .m2{width:11.94%;height:10.91%;left:73.13%;top:15.52%}
+.mission .m3{width:11.94%;height:14.17%;left:52.64%;top:33.3%}
+.mission .m4{width:11.46%;height:10.91%;left:73.06%;top:61.75%}
+.mission .m5{width:9.58%;height:9.79%;left:54.86%;top:83.35%}
+.mission .m6{width:22.22%;height:21.26%;left:75.56%;top:75.14%}
 @media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
 
 /* ---------- 7 SECTORS (pinned x5) ---------- */
@@ -412,6 +413,7 @@ Energy</div>
   <img class="m3" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/52484f61-5110-4e03-859a-1d45ee51be60/agriculture_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m4" data-dy="-6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/a19b7baf-63fb-42e4-a6a6-c2ba798adf16/transport_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   <img class="m5" data-dy="5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/3daf9b64-ac7d-4876-b339-c85b4cfa1a65/buildings_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
+  <img class="m6" data-dy="0" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8a17b9a7-da85-495a-b8f7-7bba2d900dbb/manufacturing_0.png?fm=jpg&dpr=1&q=60&w=1300" alt="">
   </div>
 </section>
 
@@ -728,6 +730,9 @@ document.querySelectorAll("#mission img").forEach(img => {
   gsap.fromTo(img, { yPercent: dy }, { yPercent: -dy, ease: "none",
     scrollTrigger: { trigger: "#mission", start: "top bottom", end: "bottom top", scrub: .5 } });
 });
+// fade-out content mission sebelum sectors masuk (ref: clear p0.52-0.53, sectors p0.55)
+gsap.to(["#missionTxt", "#mission img"], { opacity: 0, ease: "none",
+  scrollTrigger: { trigger: "#mission", start: "top top", end: "bottom 98%", scrub: .4 } });
 
 /* ============ SECTORS pinned x5 ============ */
 const sLayers = document.querySelectorAll(".slayer");
