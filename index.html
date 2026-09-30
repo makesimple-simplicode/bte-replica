@@ -221,6 +221,7 @@ button,input{font:inherit;color:inherit}
 #approach{height:400svh;background:var(--cream);z-index:1}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
 .aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side);z-index:2}
+.aplayer[data-i="1"]{align-items:flex-start;padding-top:22svh}
 .aplayer .chapter{width:min(33.85%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
 .aplayer[data-i="2"] .chapter{margin-left:9.3rem}
 .aplayer .chapter .body{margin-top:1.65em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;color:rgba(18,17,14,.88);white-space:pre-line}
@@ -230,6 +231,8 @@ button,input{font:inherit;color:inherit}
 .circles{position:absolute;right:30%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh)}
 .circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
 .circles .o1,.circles .o2,.circles .o3,.circles .o4{bottom:auto;top:50%;transform:translate(-50%,-50%)}
+.circles .o0{width:112%;height:112%;background:none;box-shadow:0 0 0 1.5px rgba(18,17,14,.24);opacity:0;transition:opacity .35s}
+[data-ch="1"] .o0{opacity:1}
 .circles .o1{width:100%;height:100%;background:var(--lime)}
 .circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
 .circles .o3{width:56%;height:56%;background:rgba(235,245,195,.9)}
@@ -537,7 +540,7 @@ Energy</div>
       </div>
     </div>
     <div class="circles" id="apCircles" aria-hidden="true" data-ch="0">
-      <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
+      <i class="o0"></i><i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
       <i class="pt" style="left:42%;bottom:80%;width:12%"></i><i class="pt" style="left:34%;bottom:18%;width:7%"></i>
       <i class="pt ring" style="left:80%;bottom:7%;width:11.5%"></i><i class="pt" style="left:85%;bottom:80%;width:3.5%"></i>
       <i class="pt h" style="left:18%;bottom:90%;width:2.4%"></i><i class="pt h" style="left:50%;bottom:4%;width:2.6%"></i><i class="pt h" style="left:94%;bottom:52%;width:2.2%"></i>
