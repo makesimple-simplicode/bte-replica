@@ -700,7 +700,7 @@ gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#words", start: "top 60%" } });
 
 /* ============ QUOTE reveal ============ */
-gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 65%", end: "+=110%", scrub: .4, pin: true } })
+gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=130%", scrub: .4, pin: true } })
   .to("#quoteQ", { clipPath: "inset(0 0 0% 0)", ease: "none" }, 0)
   .to("#quoteWho", { opacity: 1, y: 0, ease: "none" }, .5)
   .to("#quoteCard", { opacity: 1, y: 0, ease: "none" }, .55);
