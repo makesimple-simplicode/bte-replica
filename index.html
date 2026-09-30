@@ -845,12 +845,9 @@ gsap.timeline({ scrollTrigger: { trigger: "#signup", start: "top 75%" } })
 const nav = document.getElementById("nav");
 function navCheck(){
   const y = 58;
-  let light = true;
-  document.querySelectorAll("[data-theme]").forEach(el => {
-    const r = el.getBoundingClientRect();
-    if (r.top <= y && r.bottom >= y) light = el.dataset.theme === "dark";
-  });
-  nav.classList.toggle("dark", light);
+  const g = document.getElementById("graph").getBoundingClientRect();
+  const gp = (y - g.top) / Math.max(1, g.height - innerHeight);
+  nav.classList.toggle("dark", g.top <= y && g.bottom >= y && gp < .55);
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
   const gStart = document.getElementById("graph").offsetTop;
   nav.classList.toggle("hide", scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5);
