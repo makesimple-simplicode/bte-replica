@@ -215,7 +215,7 @@ button,input{font:inherit;color:inherit}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
 .pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45);transition:background .2s}
 .pdots b.on{background:var(--lime)}
-.circles{position:absolute;right:11%;bottom:14svh;width:min(50vw,64svh);height:min(50vw,64svh)}
+.circles{position:absolute;right:21%;bottom:20svh;width:min(50vw,64svh);height:min(50vw,64svh)}
 .circles i{position:absolute;border-radius:50%;left:50%;transform:translateX(-50%);bottom:0}
 .circles .o1{width:100%;height:100%;background:var(--lime)}
 .circles .o2{width:78%;height:78%;background:rgba(190,235,80,.75)}
@@ -229,13 +229,15 @@ button,input{font:inherit;color:inherit}
 .sidetitle .t{writing-mode:vertical-rl;letter-spacing:.2em;padding:.3rem .5rem}
 /* approach: state diagram per chapter (ref: faint+dots → lime → gray overlay) */
 .circles .pt.h{background:transparent;box-shadow:inset 0 0 0 1.5px #fff}
+.circles .pt.ring{box-shadow:0 0 0 3.5px rgba(255,255,255,.85)}
 #apCircles[data-ch="0"] .axis,#apCircles[data-ch="1"] .axis{opacity:0;transition:opacity .35s}
 .circles .wedge{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 163deg, rgba(223,255,92,.38) 0deg, rgba(223,255,92,.38) 34deg, transparent 34deg);opacity:0;transition:opacity .45s}
 #apCircles[data-ch="0"] .wedge{opacity:1}
 .circles .pt{width:3.4%;aspect-ratio:1;background:#e8f23a;opacity:0;transition:opacity .35s;transform:none}
 #apCircles .o1,#apCircles .o2,#apCircles .o3,#apCircles .o4{transition:opacity .45s,background .45s,box-shadow .45s}
 #apCircles[data-ch="0"] .o1,#apCircles[data-ch="0"] .o2,#apCircles[data-ch="0"] .o3{opacity:1;background:transparent;box-shadow:inset 0 0 0 1.5px rgba(18,17,14,.28)}
-#apCircles[data-ch="0"] .o4,#apCircles[data-ch="1"] .o4{opacity:0}
+#apCircles[data-ch="1"] .o4{opacity:0}
+#apCircles[data-ch="0"] .o4{opacity:1;background:transparent;box-shadow:inset 0 0 0 1.5px rgba(18,17,14,.28)}
 #apCircles[data-ch="1"] .o2,#apCircles[data-ch="1"] .o3{background:var(--lime)}
 #apCircles[data-ch="0"] .pt{opacity:1}
 @media (max-width:63.99em){.aplayer .chapter{width:84%;margin-left:2.4rem}.circles{opacity:.35}}
@@ -502,7 +504,7 @@ Energy</div>
     <div class="aplayer" data-i="0">
       <div class="chapter">
         <div>Investing in Opportunity</div>
-        <div class="body">We survey the landscape for white space where we can drive technology innovation, and then leverage our unique talents to build great companies from the ground up.</div>
+        <div class="body">We survey the landscape for white space where we can drive technology discovery and leverage our unique talents to build great companies from the ground up.</div>
       </div>
     </div>
     <div class="aplayer" data-i="1">
@@ -518,8 +520,8 @@ Energy</div>
     <div class="circles" id="apCircles" aria-hidden="true" data-ch="0">
       <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
       <i class="pt" style="left:26%;bottom:76%;width:12%"></i><i class="pt" style="left:68%;bottom:74%;width:6.5%"></i>
-      <i class="pt" style="left:30%;bottom:46%;width:3.5%"></i><i class="pt" style="left:52%;bottom:14%;width:11.5%"></i>
-      <i class="pt h" style="left:66%;bottom:50%;width:4.2%"></i>
+      <i class="pt" style="left:30%;bottom:46%;width:3.5%"></i><i class="pt ring" style="left:52%;bottom:14%;width:11.5%"></i>
+      <i class="pt h" style="left:66%;bottom:50%;width:4.2%"></i><i class="pt h" style="left:38%;bottom:64%;width:2.4%"></i>
       <i class="wedge"></i><i class="bdot"></i><i class="gdot"></i>
       <div class="axis"><span class="lbl">Green Premiums</span></div>
     </div>
