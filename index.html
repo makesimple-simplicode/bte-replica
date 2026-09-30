@@ -222,7 +222,13 @@ button,input{font:inherit;color:inherit}
 .sidetitle{position:absolute;right:calc(var(--side) + .8rem);top:18%;bottom:18%;width:1px;background:rgba(18,17,14,.75);display:flex;flex-direction:column;align-items:center;justify-content:space-between;z-index:3}
 .sidetitle span{font-family:var(--serif);font-size:1.3rem;letter-spacing:.1em;text-transform:uppercase;background:var(--cream);padding:.5rem .3rem;color:rgba(18,17,14,.85);white-space:nowrap}
 .sidetitle .t{writing-mode:vertical-rl;letter-spacing:.2em;padding:.3rem .5rem}
-@media (max-width:63.99em){.aplayer .chapter{width:84%;margin-left:2.4rem}.circles{opacity:.35}}
+@media (max-width:63.99em){.aplayer .chapter{width:84%;margin-left:2.4rem}.circles .pt{width:1.6%;aspect-ratio:1;background:#e8f23a;opacity:0;transition:opacity .35s;transform:none}
+.circles .bdot{width:46%;height:46%;bottom:27%;background:#f0e84f;opacity:0;transition:opacity .4s,transform .5s cubic-bezier(.3,1,.4,1);transform:translateX(-50%) scale(.12)}
+.circles .gdot{width:30%;height:30%;bottom:35%;background:#c9c5c1;opacity:0;transition:opacity .4s;transform:translateX(-50%)}
+#apCircles[data-ch="0"] .pt{opacity:1}
+#apCircles[data-ch="1"] .bdot,#apCircles[data-ch="2"] .bdot{opacity:1;transform:translateX(-50%) scale(1)}
+#apCircles[data-ch="2"] .gdot{opacity:1}
+.circles{opacity:.35}}
 
 /* ---------- 10 SIGNUP ---------- */
 .signup{background:var(--grey);color:#fff;border-top:1px solid rgba(18,17,14,.3);padding:4.4rem var(--side) 8rem;position:relative;z-index:1}
@@ -497,8 +503,13 @@ Energy</div>
         <div class="body">Superior performance is our north star&mdash;clean technologies have to be affordable and reliable to reach global scale.</div>
       </div>
     </div>
-    <div class="circles" id="apCircles" aria-hidden="true">
+    <div class="circles" id="apCircles" aria-hidden="true" data-ch="0">
       <i class="o1"></i><i class="o2"></i><i class="o3"></i><i class="o4"></i>
+      <i class="pt" style="left:30%;bottom:58%"></i><i class="pt" style="left:54%;bottom:44%"></i>
+      <i class="pt" style="left:68%;bottom:64%"></i><i class="pt" style="left:41%;bottom:34%"></i>
+      <i class="pt" style="left:59%;bottom:72%"></i><i class="pt" style="left:36%;bottom:77%"></i>
+      <i class="pt" style="left:73%;bottom:40%"></i>
+      <i class="bdot"></i><i class="gdot"></i>
       <div class="axis"><span class="lbl">Green Premiums</span></div>
     </div>
     <div class="sidetitle" id="apSide"><span class="t">Discover</span><span>+$</span><span>&minus;$</span></div>
@@ -715,7 +726,7 @@ const secTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#sectors", start: "top top", end: "bottom bottom", scrub: .4,
     onUpdate: self => {
-      const idx = Math.min(4, Math.round(self.progress * 5));
+      const idx = Math.min(4, Math.floor(self.progress * 5));
       sdots.forEach((d, i) => d.classList.toggle("on", i === idx));
     },
     onToggle: self => {
@@ -757,9 +768,11 @@ const apTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#approach", start: "top top", end: "bottom bottom", scrub: .4,
     onUpdate: self => {
-      const idx = Math.min(2, Math.round(self.progress * 3));
+      const idx = Math.min(2, Math.floor(self.progress * 3));
       apDots.forEach((d, i) => d.classList.toggle("on", i === idx));
       if (sideT.textContent !== sideNames[idx]) sideT.textContent = sideNames[idx];
+      const ch = String(idx);
+      if (document.getElementById("apCircles").dataset.ch !== ch) document.getElementById("apCircles").dataset.ch = ch;
     }
   }
 });
