@@ -18,6 +18,7 @@
   --sans:Saans,helvetica,arial,sans-serif;
   --serif:ItemsRegular,Georgia,"Times New Roman",serif;
 }
+html{font-size:62.5%}
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 body{font-family:var(--sans);color:var(--ink);background:var(--cream);-webkit-font-smoothing:antialiased;overflow-x:clip}
 img,video{display:block;max-width:100%}
@@ -50,7 +51,7 @@ button,input{font:inherit;color:inherit}
 .nav.dark .left,.nav.dark .ring{color:var(--ink)}
 .nav.dark .burger span{background:var(--ink)}
 .burger:hover span:nth-child(2){transform:scaleX(.7);transform-origin:right}
-@media (max-width:47.99em){.nav .left{font-size:1.3rem}}
+@media (max-width:47.99em){.nav .left{font-size:1.3rem}.aplayer .chapter{font-size:16px}}
 
 /* ---------- menu ---------- */
 .menu{position:fixed;top:12px;right:12px;width:44%;height:calc(100% - 24px);background:var(--lime);z-index:70;transform:translateX(calc(100% + 24px));transition:transform .45s cubic-bezier(.76,0,.24,1);display:flex;flex-direction:column;justify-content:space-between;padding:9rem 3rem 3rem}
@@ -76,12 +77,11 @@ button,input{font:inherit;color:inherit}
 .hero .bg video,.hero .bg img{width:100%;height:100%;object-fit:cover}
 .hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,10,16,.38),rgba(8,10,16,.12) 45%,rgba(8,10,16,.55))}
 .hero .inner{position:relative;height:100%;display:flex;flex-direction:column;justify-content:center;padding:0 var(--side)}
-.hero h1{font-weight:500;font-size:min(9.64vw,10vh);line-height:.97em;letter-spacing:-.04em;white-space:pre-line;font-kerning:none}
+.hero h1{font-weight:500;font-size:min(9.651vw,16rem);line-height:1.06em;letter-spacing:-.04em;white-space:pre-line;font-kerning:none}
 @media (max-width:47.99em){.hero h1{font-size:14.23vw}}
-.hero h1 .line{display:block;overflow:hidden}
+.hero h1 .line{display:block;overflow:hidden;white-space:nowrap;width:calc(100% + 25px)}
 .hero h1 .line i{display:block;font-style:normal;transform:translateY(110%)}
 .hero h1 .line.r{display:flex;justify-content:flex-end;width:100%}
-.hero .sub{margin-top:2.8rem;max-width:44rem;font-size:1.7rem;line-height:1.4;opacity:0;color:rgba(250,251,248,.92)}
 .scrollcue{position:absolute;bottom:2.4rem;left:calc(var(--side) - .65rem);height:30px;display:flex;align-items:center;gap:.6rem;color:var(--cream);font-size:1.4rem;line-height:1.15em;z-index:6;opacity:0}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
@@ -180,8 +180,8 @@ button,input{font:inherit;color:inherit}
 .slayer{position:absolute;inset:0}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 3svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:62svh;overflow:hidden;z-index:2}
 .slayer .sframe video,.slayer .sframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.stitle{position:absolute;left:0;top:calc(50% - 31svh);width:100%;text-align:center;font-weight:700;font-size:min(11vw,15svh);line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
-.sframe .clonetitle{position:absolute;left:50%;top:0;width:100vw;transform:translate(-50%,-45%);text-align:center;font-weight:700;font-size:min(11vw,15svh);line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
+.stitle{position:absolute;left:0;top:calc(50% - 31svh);width:100%;text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
+.sframe .clonetitle{position:absolute;left:50%;top:0;width:100vw;transform:translate(-50%,-45%);text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
 .sinfo{position:absolute;left:2.4rem;bottom:1.4rem;max-width:64%;z-index:4;text-align:left}
 .sbadge{display:inline-block;border:1px solid rgba(250,251,248,.85);border-radius:999px;padding:.5rem 1.1rem;font-size:1.3rem;margin-bottom:1rem;background:rgba(0,0,0,.3)}
 .spara{font-size:1.55rem;line-height:1.4;color:#fff;text-shadow:0 1px .8rem rgba(0,0,0,.55);max-width:44rem}
@@ -190,7 +190,7 @@ button,input{font:inherit;color:inherit}
 .sdots{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:6}
 .sdots b{width:.68rem;height:.68rem;border-radius:50%;border:1.5px solid rgba(250,251,248,.9);background:transparent;transition:background .2s,border-color .2s}
 .sdots b.on{background:var(--lime);border-color:var(--lime)}
-@media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:14vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
+@media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:19.86vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
 
 /* ---------- 8 INNOVATION ---------- */
 .innov{position:relative;height:100svh;background:#000;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible;z-index:1}
@@ -313,10 +313,10 @@ Energy</div>
   </div>
   <div class="inner">
     <h1><span class="line"><i>Empowering innovators</i></span><span class="line"><i>to build the future</i></span><span class="line r"><i>of energy</i></span></h1>
-    <p class="sub">Breakthrough Energy is a global platform to accelerate clean energy innovation and build the industries of the future.</p>
-  </div>
-  <div class="scrollcue">Scroll for more
+ </div>
+  <div class="scrollcue">
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 3v14M4 11l6 6 6-6"/></svg>
+    Scroll for more
   </div>
 </section>
 
@@ -619,13 +619,12 @@ intro
   .to(".pt-wrap", { x: "-250vw", duration: .8, ease: "power2.inOut" }, .267)
   .to("#curtain .pt-logo", { opacity: 0, duration: .25, ease: "sine.in" }, .75)
   .to(heroLines, { y: 0, duration: .7, stagger: .09, ease: "power3.out" }, .95)
-  .to(".hero .sub", { opacity: 1, duration: .5, ease: "sine.out" }, "-=.35")
   .to(".scrollcue", { opacity: 1, duration: .4, ease: "sine.out" }, "-=.2");
 gsap.to(".scrollcue svg", { y: 4, duration: .8, repeat: -1, yoyo: true, ease: "sine.inOut" });
 if (isStatic || reduce){
   intro.progress(1);
   gsap.set(heroLines, { y: 0 });
-  gsap.set([".hero .sub", ".scrollcue"], { opacity: 1 });
+  gsap.set(".scrollcue", { opacity: 1 });
 }
 
 /* ============ hero pin (stage menimpanya = wipe up) ============ */
