@@ -731,7 +731,7 @@ document.querySelectorAll("#mission img").forEach(img => {
     scrollTrigger: { trigger: "#mission", start: "top bottom", end: "bottom top", scrub: .5 } });
 });
 // fade-out content mission sebelum sectors masuk (ref: clear p0.52-0.53, sectors p0.55)
-gsap.to(["#missionTxt", "#mission img"], { opacity: 0, ease: "none",
+gsap.to(".mstick", { opacity: 0, ease: "none",
   scrollTrigger: { trigger: "#mission", start: "top 15%", end: "bottom 92%", scrub: .4 } });
 
 /* ============ SECTORS pinned x5 ============ */
