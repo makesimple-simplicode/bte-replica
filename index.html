@@ -115,8 +115,8 @@ button,input{font:inherit;color:inherit}
 .prosph .w{display:inline-block;opacity:0;transform:translateY(.5em)}
 
 /* ---------- 3 GRAPH ---------- */
-#graph{height:312svh;background:var(--cream);z-index:1}
-#graph .pinned{z-index:3}
+#graph{height:312svh;background:transparent;z-index:1}
+#graph .pinned{z-index:3;background:var(--cream)}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
 .gbox .gphoto{position:absolute;left:0;right:0;bottom:0;height:0;object-fit:cover;z-index:1}
@@ -697,11 +697,14 @@ s1tl.to("#stage1 .s1imgs img", { autoAlpha: 0, ease: "none", duration: .1 }, .86
 
 /* ============ GRAPH scrub ============ */
 const gtl = gsap.timeline({
-  scrollTrigger: { trigger: "#graph", start: "top top", end: "bottom bottom", scrub: .5 }
+  scrollTrigger: { trigger: "#graph", start: "top top", end: "bottom bottom", scrub: .5,
+    onLeave: () => gsap.set("#graph .pinned", { autoAlpha: 0 }),
+    onEnterBack: () => gsap.set("#graph .pinned", { autoAlpha: 1 }) }
 });
 gtl.fromTo(".gbox .limepart", { height: "0%" }, { height: "52%", ease: "none", duration: .2 }, .05);
-gtl.to(".gbox .gphoto", { height: "35%", ease: "none", duration: .2 }, .55);
-gtl.to(".gbox .limepart", { bottom: "35%", height: "40%", ease: "none", duration: .2 }, .55);
+gtl.to(".gbox .gphoto", { height: "30%", ease: "none", duration: .2 }, .55);
+gtl.to(".gbox .limepart", { bottom: "30%", height: "45%", ease: "none", duration: .2 }, .55);
+gtl.to(".gtext p", { fontSize: "6cqw", ease: "none", duration: .2 }, .55);
 gtl.to(".gtext > div", { opacity: 0, ease: "none", duration: .12 }, .65);
 gtl.fromTo(".gtext p", { opacity: 0, y: 10 }, { opacity: 1, y: 0, ease: "none", duration: .12 }, .70);
 gtl.fromTo(".gmark.top", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none", duration: .1 }, .10);
