@@ -197,8 +197,9 @@ button,input{font:inherit;color:inherit}
 
 /* ---------- 8 INNOVATION ---------- */
 .innov{position:relative;height:100svh;background:#000;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible;z-index:1}
-.innov h2{font-weight:500;font-size:min(7.4vw,12rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
+.innov h2{font-weight:500;font-size:min(3.34vw,4.8rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
 .innov h2 .lime{color:var(--lime);font-weight:700}
+#innovH{margin-top:-9.4svh}
 .innov h2 .line{display:block;overflow:hidden}
 .innov h2 .line>span{display:block;transform:translateY(110%)}
 .innov .pill{position:absolute;left:50%;bottom:2.4rem;transform:translateX(-50%);height:3.8rem;width:22rem;max-width:86vw;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0;transition:filter .25s}
@@ -208,7 +209,8 @@ button,input{font:inherit;color:inherit}
 #approach{height:330svh;background:var(--cream);z-index:1}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
 .aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side);z-index:2}
-.aplayer .chapter{width:min(34%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
+.aplayer .chapter{width:min(34%,500px);margin-left:4rem}
+.aplayer[data-i="2"] .chapter{margin-left:9.3rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
 .aplayer .chapter .body{margin-top:1.65em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;color:rgba(18,17,14,.88);white-space:pre-line}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
 .pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45);transition:background .2s}
@@ -527,7 +529,7 @@ Energy</div>
   <div class="row">
     <div class="col-l">
       <h3 class="t-h3 title" id="signupTitle"><span><i>No Noise.</i></span><span><i>Just Breakthroughs.</i></span></h3>
-      <p class="txt" id="signupTxt">Breaking Through is your shortcut to clean energy innovation. By clicking to subscribe, you agree to receive newsletters that will help you track market moves, portfolio milestones, and leadership perspectives shaping the next wave of breakthroughs.</p>
+      <p class="txt" id="signupTxt" style="display:none">Breaking Through is your shortcut to clean energy innovation. By clicking to subscribe, you agree to receive newsletters that will help you track market moves, portfolio milestones, and leadership perspectives shaping the next wave of breakthroughs.</p>
     </div>
     <div class="col-r">
       <form onsubmit="event.preventDefault()">
