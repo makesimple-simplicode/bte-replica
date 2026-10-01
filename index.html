@@ -773,6 +773,9 @@ gsap.to(".mstick", { opacity: 0, ease: "none",
 
 /* ============ SECTORS pinned x5 ============ */
 const sLayers = document.querySelectorAll(".slayer");
+  const sectorPinned = document.querySelector("#sectors .pinned");
+  const spills = Array.from(sLayers).map(L => { const s = L.querySelector(".spill"); sectorPinned.appendChild(s); return s; });
+  gsap.set(spills.slice(1), { opacity: 0 });
 const sdots = document.querySelectorAll("#sdots b");
 gsap.set(sLayers, { autoAlpha: 1 });
 const secTl = gsap.timeline({
@@ -803,6 +806,8 @@ sLayers.forEach((L, i) => {
   const w = i === 1 ? .215 : i === 4 ? .71 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
   const tOut = [sLayers[i - 1].querySelector(".clonetitle"), sLayers[i - 1].querySelector(".sinfo")];
+  secTl.to(spills[i - 1], { opacity: 0, duration: .03, ease: "none" }, w + .05);
+  secTl.to(spills[i], { opacity: 1, duration: .03, ease: "none" }, w + .05);
   const tIn = [L.querySelector(".clonetitle"), L.querySelector(".sinfo")];
   secTl.to(tOut, { opacity: 0, duration: i === 4 ? .24 : .02, ease: "none" }, w + (i === 4 ? .04 : 0));
   gsap.set(tIn, { opacity: 0 });
