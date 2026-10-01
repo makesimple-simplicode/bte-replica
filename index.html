@@ -874,6 +874,10 @@ gsap.timeline({ scrollTrigger: { trigger: "#signup", start: "top 75%" } })
   .to("#signupTxt", { opacity: 1, y: 0, duration: .5, ease: "sine.out" }, .2)
   .to(".signup .field", { opacity: 1, y: 0, duration: .5, stagger: .1, ease: "sine.out" }, .3);
 
+/* hero video: start after 4s (ref first frame = video t0; natural load plays later too) */
+const hv0 = document.querySelector("#hero video");
+if (hv0) { hv0.pause(); setTimeout(() => hv0.play().catch(() => {}), 4000); }
+
 /* ============ nav ============ */
 const nav = document.getElementById("nav");
 function navCheck(){
