@@ -206,7 +206,7 @@ button,input{font:inherit;color:inherit}
 .spara{font-size:min(calc((1.4rem) + (2 - 1.4) * (100vw - 37.5rem) / 106.5),2rem);line-height:min(calc((1.16em) + (1.2 - 1.16) * (100vw - 37.5rem) / 106.5),1.2em);letter-spacing:0;font-weight:500;color:#fafbf8;text-shadow:0 1px .8rem rgba(0,0,0,.55);max-width:44rem}
 .spill{position:absolute;left:calc(50vw - 15rem);bottom:var(--side);transform:none;width:30rem;height:4.3rem;border-radius:0;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5;white-space:nowrap;transition:filter .25s}
 .spill:hover{filter:brightness(.93)}
-.sdots{position:absolute;right:1.6rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:6}
+.sdots{position:absolute;right:3.1rem;top:43.5%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:6}
 .sdots b{width:.68rem;height:.68rem;border-radius:50%;border:1.5px solid rgba(250,251,248,.9);background:transparent;transition:background .2s,border-color .2s}
 .sdots b.on{background:var(--lime);border-color:var(--lime)}
 @media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:19.86vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
@@ -801,7 +801,12 @@ const secTl = gsap.timeline({
 // push cepat + HOLD (bukti settled ref: split lalu hold statis, bukan crossfade)
 // pita digeser 100% per boundary, diam (hold) di antaranya
 const pita = { k: 0 };
-const applyPita = () => sLayers.forEach((L, j) => gsap.set(L, { yPercent: (j - pita.k) * 100 }));
+const applyPita = () => sLayers.forEach((L, j) => {
+  gsap.set(L, { yPercent: (j - pita.k) * 100 });
+  const sf = L.querySelector(".sframe");
+  // ponytail: card counter-slide sin — ref transition leaves ~155px gap at midline
+  gsap.set(sf, { yPercent: -50 - 10 * Math.sin(Math.PI * (pita.k - j + 1)) });
+});
 applyPita();
 window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
 sLayers.forEach((L, i) => {
@@ -881,7 +886,7 @@ function navCheck(){
   const gStart = document.getElementById("graph").offsetTop;
   const mStart = document.getElementById("mission").offsetTop;
   const stage1Hide = scrollY < gStart - innerHeight * .5;
-  nav.classList.toggle("hide", stage1Hide || scrollY >= mStart - 100);
+  nav.classList.toggle("hide", stage1Hide);
 }
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
