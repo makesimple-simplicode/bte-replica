@@ -688,7 +688,7 @@ gsap.from("#stage1 .s1imgs img", {
   scrollTrigger: { trigger: "#stage1", start: "top 85%", end: "top 5%", scrub: .5 }
 });
 const s1tl = gsap.timeline({
-  scrollTrigger: { trigger: "#stage1", start: "top top", end: "bottom bottom", scrub: .6 }
+  scrollTrigger: { trigger: "#stage1", start: "top top", end: "bottom+=70 bottom", scrub: .6 }
 });
 document.querySelectorAll("#stage1 .sp").forEach(img => {
   const dx = parseFloat(img.dataset.dx || 0), dy = parseFloat(img.dataset.dy || 0);
@@ -697,7 +697,6 @@ document.querySelectorAll("#stage1 .sp").forEach(img => {
 s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .07 }, .26);
 s1tl.to(".mark1", { opacity: 0, scale: .6, ease: "none", duration: .06 }, .28);
 s1tl.to(".mark2", { opacity: .45, ease: "none", duration: .08 }, .28);
-s1tl.to(".mark2", { opacity: 0, ease: "none", duration: .06 }, .50);
 s1tl.to(mWords, { opacity: 1, y: 0, stagger: .007, ease: "none", duration: .1 }, .50);
 s1tl.to(mWords, { opacity: 0, ease: "none", duration: .06 }, .82);
 s1tl.to(".mline", { opacity: 0, ease: "none", duration: .06 }, .84);
