@@ -38,8 +38,9 @@ button,input{font:inherit;color:inherit}
 #curtain .pt-logo svg{width:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem);height:min(calc((8rem) + (14.8 - 8) * (100vw - 37.5rem) / 106.5),14.8rem)}
 
 /* ---------- nav ---------- */
-.nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none;background:var(--cream);transition:background .3s,opacity .35s}
-.nav.dark{background:var(--lime) !important}
+.nav{position:fixed;top:0;left:0;width:100%;z-index:60;padding:1.3rem var(--side);display:flex;align-items:flex-start;pointer-events:none;background:transparent;transition:background .3s,opacity .35s}
+.nav.lime{background:var(--lime)}
+.nav.blk{background:#000}
 .nav.hide{opacity:0;pointer-events:none}
 .nav *{pointer-events:auto}
 .nav .left{font-weight:500;font-size:1.5rem;line-height:1.05;letter-spacing:-.01em;color:var(--cream);white-space:pre-line;transition:opacity .3s}
@@ -224,7 +225,7 @@ button,input{font:inherit;color:inherit}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
 .aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side);z-index:2}
 .aplayer[data-i="1"]{align-items:flex-start;padding-top:22svh}
-.aplayer .chapter{width:min(33.85%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
+.aplayer .chapter{width:min(36%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
 .aplayer[data-i="2"] .chapter{margin-left:9.3rem}
 .aplayer .chapter .body{margin-top:1.65em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;color:rgba(18,17,14,.88);white-space:pre-line}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
@@ -797,13 +798,13 @@ applyPita();
 window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
 sLayers.forEach((L, i) => {
   if (i === 0) return;
-  const w = i === 1 ? .215 : i === 4 ? .895 : i / 5 - .025;
+  const w = i === 1 ? .215 : i === 4 ? .86 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
   const tOut = sLayers[i - 1].querySelector(".clonetitle");
   const tIn = L.querySelector(".clonetitle");
   secTl.to(tOut, { opacity: 0, duration: .02, ease: "none" }, w);
   gsap.set(tIn, { opacity: 0 });
-  secTl.to(tIn, { opacity: 1, duration: .03, ease: "none" }, w + .05);
+  secTl.to(tIn, { opacity: 1, duration: .03, ease: "none" }, w + (i === 4 ? .07 : .05));
 });
 
 /* ============ INNOVATION ============ */
@@ -857,16 +858,20 @@ gsap.timeline({ scrollTrigger: { trigger: "#signup", start: "top 75%" } })
 const nav = document.getElementById("nav");
 function navCheck(){
   const y = 58;
+  let light = true;
+  document.querySelectorAll("[data-theme]").forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.top <= y && r.bottom >= y) light = el.dataset.theme === "dark";
+  });
+  nav.classList.toggle("dark", light);
   const g = document.getElementById("graph").getBoundingClientRect();
   const gp = (y - g.top) / Math.max(1, g.height - innerHeight);
-  nav.classList.toggle("dark", g.top <= y && g.bottom >= y && gp < .55);
+  nav.classList.toggle("lime", g.top <= y && g.bottom >= y && gp < .55);
+  const iv = document.getElementById("innov").getBoundingClientRect();
+  nav.classList.toggle("blk", iv.top <= y && iv.bottom >= y);
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
   const gStart = document.getElementById("graph").offsetTop;
-  const mStart = document.getElementById("mission").offsetTop;
-  const iStart = document.getElementById("innov").offsetTop;
-  const stage1Hide = scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5;
-  const darkHide = scrollY >= mStart - 100 && scrollY < iStart - 100;
-  nav.classList.toggle("hide", stage1Hide || darkHide);
+  nav.classList.toggle("hide", scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5);
 }
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
