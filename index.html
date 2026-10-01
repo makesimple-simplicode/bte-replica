@@ -163,11 +163,11 @@ button,input{font:inherit;color:inherit}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
 /* ---------- 6 MISSION ---------- */
-.mission{position:relative;height:140svh;background:#000;color:var(--cream);z-index:1}
+.mission{position:relative;height:345svh;background:#000;color:var(--cream);z-index:1}
 .mission .mstick{position:sticky;top:0;height:100svh;overflow:hidden}
-.mission .txt{position:absolute;left:50%;transform:translateX(-50%);top:calc(50% - 4rem);width:min(94vw,1360px);text-align:left;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.1;letter-spacing:-.02em;z-index:2}
+.mission .txt{position:absolute;left:50%;transform:translate(-50%,-50%);top:50%;width:100%;max-width:94vw;text-align:left;font-weight:500;font-size:2.25vw;line-height:1.1;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
-.mission .txt .ml{display:block;opacity:0;transform:translateY(.4em)}
+.mission .txt .ml{display:block;opacity:0}
 .mission .txt .lime{color:#dfff5c}
 .mission img{position:absolute;object-fit:cover;box-shadow:0 16px 46px rgba(0,0,0,.5)}
 .mission .m1{width:9.58%;height:9.79%;left:35.76%;top:13.72%}
@@ -176,7 +176,7 @@ button,input{font:inherit;color:inherit}
 .mission .m4{width:11.46%;height:10.91%;left:73.06%;top:61.75%}
 .mission .m5{width:9.58%;height:9.79%;left:54.86%;top:83.35%}
 .mission .m6{width:22.22%;height:21.26%;left:75.56%;top:75.14%}
-@media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
+@media (max-width:63.99em){.mission .txt{width:86%;max-width:none;font-size:4.85vw}.mission img{opacity:.5}}
 
 /* ---------- 7 SECTORS (pinned x5) ---------- */
 #sectors{height:690svh;background:#000;z-index:1}
@@ -793,14 +793,34 @@ gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top top", end: "+=90
   .to({}, { duration: 1 }, 0);
 
 /* ============ MISSION ============ */
+/* Port persis Th() dari app.js ref (KeyAreas desktop): tiap baris x:100->0 ease circ.out,
+   start bertahap 0/.3/.6/.9, durasi 1.5-c*.2, autoAlpha pop di start+.05, lalu semua fade out.
+   Fase scroll (satuan vh dalam rentang pin, ref K12->13.75): in 1.0 | hold 0.4 | out 0.35 */
 const missionWs = document.querySelectorAll("#missionTxt .ml");
-// trigger elemen teks: reveal terlihat selama teks masuk viewport (ref: partial lalu full)
-// reveal per baris DIMULAI saat teks masuk viewport (ref: p0.46 baris1 → p0.50 semua)
-gsap.to(missionWs, {
-  opacity: 1, y: 0, stagger: .1, duration: .2, ease: "none",
-  scrollTrigger: { trigger: "#missionTxt", start: "top bottom", end: "top 40%", scrub: .4 }
+const mtl = gsap.timeline({ paused: true });
+missionWs.forEach((el, c) => {
+  const dur = 1.5 - c * .2;
+  mtl.set(el, { x: 100, autoAlpha: 0 }, 0);
+  mtl.to(el, { duration: dur, x: 0, ease: "circ.out" }, c * .3);
+  mtl.to(el, { duration: 0, autoAlpha: 1 }, c * .3 + .05);
 });
-// thumbnails slide-in bersamaan awal reveal (ref: tiles masuk 1 per 1)
+const mIn = mtl.duration();                    /* 1.8 — baris terakhir selesai masuk */
+missionWs.forEach(el => mtl.to(el, { duration: .5, autoAlpha: 0 }, mIn + .01));
+const mBis = mIn / mtl.duration();             /* 1.8/2.31 = .7792 — identik dgn ref */
+const M_LEAD = .7, M_IN = 1, M_HOLD = .4, M_OUT = .35, M_PIN = 2.45;  /* pinned = 345svh-100svh = 245svh; ref lead K11.3->12.0 */
+gsap.to({ v: 0 }, {
+  v: 1, ease: "none",
+  onUpdate: function () {
+    const s = this.targets()[0].v * M_PIN;
+    let p = s < M_LEAD ? 0
+      : s < M_LEAD + M_IN ? (s - M_LEAD) / M_IN * mBis
+      : s < M_LEAD + M_IN + M_HOLD ? mBis
+      : Math.min(1, mBis + (s - M_LEAD - M_IN - M_HOLD) / M_OUT * (1 - mBis));
+    mtl.progress(p);
+  },
+  scrollTrigger: { trigger: "#mission", start: "top top", end: "bottom bottom", scrub: .4 }
+});
+/* thumbnails slide-in saat section masuk (sebelum pin), ref: cluster mulai K10.6 */
 gsap.from("#mission img", {
   autoAlpha: 0, y: 130, stagger: .06, duration: .5, ease: "none",
   scrollTrigger: { trigger: "#mission", start: "top 85%", end: "top 25%", scrub: .4 }
@@ -810,9 +830,6 @@ document.querySelectorAll("#mission img").forEach(img => {
   gsap.fromTo(img, { yPercent: dy }, { yPercent: -dy, ease: "none",
     scrollTrigger: { trigger: "#mission", start: "top bottom", end: "bottom top", scrub: .5 } });
 });
-// fade-out content mission sebelum sectors masuk (ref: clear p0.52-0.53, sectors p0.55)
-gsap.to(".mstick", { opacity: 0, ease: "none",
-  scrollTrigger: { trigger: "#mission", start: "top 15%", end: "bottom 92%", scrub: .4 } });
 
 /* ============ SECTORS pinned x5 ============ */
 const sLayers = document.querySelectorAll(".slayer");
