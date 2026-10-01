@@ -211,7 +211,7 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:19.86vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
 
 /* ---------- 8 INNOVATION ---------- */
-.innov{position:relative;height:100svh;background:#000;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible;z-index:1}
+.innov{position:relative;height:100svh;background:#151515;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:visible;z-index:1}
 .innov h2{font-weight:500;font-size:min(3.34vw,4.8rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
 .innov h2 .lime{color:var(--lime);font-weight:700}
 #innovH{margin-top:-9.4svh}
@@ -802,8 +802,8 @@ sLayers.forEach((L, i) => {
   if (i === 0) return;
   const w = i === 1 ? .215 : i === 4 ? .86 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
-  const tOut = sLayers[i - 1].querySelector(".clonetitle");
-  const tIn = L.querySelector(".clonetitle");
+  const tOut = [sLayers[i - 1].querySelector(".clonetitle"), sLayers[i - 1].querySelector(".sinfo")];
+  const tIn = [L.querySelector(".clonetitle"), L.querySelector(".sinfo")];
   secTl.to(tOut, { opacity: 0, duration: .02, ease: "none" }, w);
   gsap.set(tIn, { opacity: 0 });
   secTl.to(tIn, { opacity: 1, duration: .03, ease: "none" }, w + (i === 4 ? .07 : .05));
