@@ -778,6 +778,8 @@ gsap.set(sLayers, { autoAlpha: 1 });
 const secTl = gsap.timeline({
   scrollTrigger: {
     trigger: "#sectors", start: "top top", end: "bottom bottom", scrub: .4,
+    onLeave: () => gsap.set("#sectors .pinned", { autoAlpha: 0 }),
+    onEnterBack: () => gsap.set("#sectors .pinned", { autoAlpha: 1 }),
     onUpdate: self => {
       const idx = Math.min(4, Math.floor(self.progress * 5));
       sdots.forEach((d, i) => d.classList.toggle("on", i === idx));
@@ -867,11 +869,11 @@ function navCheck(){
   const g = document.getElementById("graph").getBoundingClientRect();
   const gp = (y - g.top) / Math.max(1, g.height - innerHeight);
   nav.classList.toggle("lime", g.top <= y && g.bottom >= y && gp < .55);
-  const iv = document.getElementById("innov").getBoundingClientRect();
-  nav.classList.toggle("blk", iv.top <= y && iv.bottom >= y);
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
   const gStart = document.getElementById("graph").offsetTop;
-  nav.classList.toggle("hide", scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5);
+  const mStart = document.getElementById("mission").offsetTop;
+  const stage1Hide = scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5;
+  nav.classList.toggle("hide", stage1Hide || scrollY >= mStart - 100);
 }
 addEventListener("scroll", navCheck, { passive: true });
 navCheck();
