@@ -200,7 +200,7 @@ button,input{font:inherit;color:inherit}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 2svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:65svh;overflow:visible;z-index:2}
 .slayer .sframe video,.slayer .sframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .stitle{position:absolute;left:0;top:calc(50% - 27.8svh);width:100%;text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--cream);white-space:nowrap;transform:translateY(-45%);z-index:1;pointer-events:none}
-.sframe .clonetitle{position:absolute;left:0;top:0;width:100vw;transform:translate(0,-65%);text-align:left;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
+.sframe .clonetitle{position:absolute;left:0;top:0;width:100vw;transform:translate(0,-49%);text-align:center;font-weight:500;font-size:11.79vw;line-height:.95;letter-spacing:-.04em;color:var(--lime);white-space:nowrap;z-index:3;pointer-events:none}
 .sinfo{position:absolute;left:2.4rem;bottom:1.4rem;max-width:64%;z-index:4;text-align:left}
 .sbadge{display:inline-block;border:1px solid #FAFBF8;border-radius:1em;padding:.18em .65em .2em;font-size:max(13px,1vw);font-family:var(--sans);font-weight:500;letter-spacing:0;margin-bottom:1vw;background:transparent}
 .spara{font-size:min(calc((1.4rem) + (2 - 1.4) * (100vw - 37.5rem) / 106.5),2rem);line-height:min(calc((1.16em) + (1.2 - 1.16) * (100vw - 37.5rem) / 106.5),1.2em);letter-spacing:0;font-weight:500;color:#fafbf8;text-shadow:0 1px .8rem rgba(0,0,0,.55);max-width:44rem}
@@ -789,6 +789,7 @@ const secTl = gsap.timeline({
     onUpdate: self => {
       const idx = Math.min(4, Math.floor(self.progress * 5));
       sdots.forEach((d, i) => d.classList.toggle("on", i === idx));
+      document.getElementById("sdots").style.opacity = idx === 4 ? 0 : 1;
     },
     onToggle: self => {
       document.querySelectorAll("#sectors video").forEach(v => {
@@ -801,8 +802,9 @@ const secTl = gsap.timeline({
 // push cepat + HOLD (bukti settled ref: split lalu hold statis, bukan crossfade)
 // pita digeser 100% per boundary, diam (hold) di antaranya
 const pita = { k: 0 };
+const slide = { v: 0 };
 const applyPita = () => sLayers.forEach((L, j) => {
-  gsap.set(L, { yPercent: (j - pita.k) * 100 });
+  gsap.set(L, { yPercent: (j - pita.k) * 100, y: slide.v });
   const sf = L.querySelector(".sframe");
   // ponytail: asymmetric counter-slide (ref: out bottom 398, in top 553 at k=.5)
   const s = Math.sin(Math.PI * (pita.k - j + 1));
@@ -814,13 +816,14 @@ sLayers.forEach((L, i) => {
   if (i === 0) return;
   const w = i === 1 ? .209 : i === 4 ? .75 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
+  if (i === 1) secTl.to(slide, { v: -173, duration: .22, ease: "none", onUpdate: applyPita }, .70);
   const tOut = [sLayers[i - 1].querySelector(".clonetitle"), sLayers[i - 1].querySelector(".sinfo")];
   secTl.to(spills[i - 1], { opacity: 0, duration: .03, ease: "none" }, w + .05);
   secTl.to(spills[i], { opacity: 1, duration: .03, ease: "none" }, w + .05);
   const tIn = [L.querySelector(".clonetitle"), L.querySelector(".sinfo")];
   secTl.to(tOut, { opacity: 0, duration: i === 4 ? .24 : .02, ease: "none" }, w + (i === 4 ? .04 : 0));
   gsap.set(tIn, { opacity: 0 });
-  if (i < 4) secTl.to(tIn, { opacity: 1, duration: .03, ease: "none" }, w + .05);
+  secTl.to(tIn, { opacity: 1, duration: .03, ease: "none" }, w + .05);
 });
 
 /* ============ INNOVATION ============ */
