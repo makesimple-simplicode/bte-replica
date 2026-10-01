@@ -89,7 +89,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:533svh;background:var(--lime);z-index:1}
+#stage1{height:540svh;background:var(--lime);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -193,7 +193,7 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.mission .txt{width:86%}.mission img{opacity:.5}}
 
 /* ---------- 7 SECTORS (pinned x5) ---------- */
-#sectors{height:684svh;background:#000;z-index:1}
+#sectors{height:690svh;background:#000;z-index:1}
 #sectors .pinned{background:#000}
 .slayer{position:absolute;inset:0}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 2svh);transform:translate(-50%,-50%);width:min(86vw,1360px);height:65svh;overflow:visible;z-index:2}
@@ -211,13 +211,13 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.slayer .sframe{width:94vw;height:56svh}.stitle,.slayer .clonetitle{font-size:19.86vw}.sinfo{max-width:84%}.sdots{right:.6rem}}
 
 /* ---------- 8 INNOVATION ---------- */
-.innov{position:relative;height:100svh;background:#151515;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:31.8rem;overflow:visible;z-index:1}
+.innov{position:relative;height:100svh;background:#151515;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:42.8rem;overflow:visible;z-index:1}
 .innov h2{font-weight:500;font-size:min(3.34vw,4.8rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
 .innov h2 .lime{color:var(--lime);font-weight:700}
 #innovH{margin-top:-9.4svh}
 .innov h2 .line{display:block;overflow:hidden}
 .innov h2 .line>span{display:block;transform:translateY(110%)}
-.innov .pill{position:absolute;left:50%;bottom:20.5rem;transform:translateX(-50%);height:3.8rem;width:22rem;max-width:86vw;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0;transition:filter .25s}
+.innov .pill{position:absolute;left:50%;bottom:.4rem;transform:translateX(-50%);height:3.8rem;width:22rem;max-width:86vw;border-radius:6px;background:var(--lime);color:var(--ink);border:0;cursor:pointer;font-size:1.6rem;font-weight:500;display:flex;align-items:center;justify-content:center;z-index:5;opacity:0;transition:filter .25s}
 .innov .pill:hover{filter:brightness(.93)}
 
 /* ---------- 9 APPROACH (pinned x3) ---------- */
@@ -379,8 +379,8 @@ Energy</div>
       <img class="i14 sp" data-dx="-5" data-dy="6" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/6018a519-607b-4d12-9447-8e26b3f37880/mediaswirl-3_2x.webp" alt="">
       <img class="i15 sp" data-dx="4" data-dy="-5" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/4a0b1b43-96db-47f3-a1f7-db5b36e90e72/Golden%20Computer%20Chip.jpg?fm=jpg&dpr=1&q=60&w=700" alt="">
     </div>
-    <svg class="mark1" viewBox="0 0 72 72" fill="none" stroke="currentColor"><g class="flower-big"></g></svg>
-    <svg class="mark2" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".35"><g class="flower-big"></g></svg>
+    <svg class="mark1" viewBox="0 0 72 72" fill="none" stroke="currentColor"><circle cx="26.5" cy="36" r="17"/><circle cx="45.5" cy="36" r="17"/></svg>
+    <svg class="mark2" viewBox="0 0 72 72" fill="none" stroke="currentColor" stroke-width=".35"><circle cx="26.5" cy="36" r="17"/><circle cx="45.5" cy="36" r="17"/></svg>
     <p class="mline">Breakthrough Energy is a global platform to accelerate clean energy innovation and build the industries of the future.</p>
     <h2 class="prosph">Energy is prosperity</h2>
   </div>
@@ -694,7 +694,7 @@ document.querySelectorAll("#stage1 .sp").forEach(img => {
   const dx = parseFloat(img.dataset.dx || 0), dy = parseFloat(img.dataset.dy || 0);
   s1tl.fromTo(img, { xPercent: -dx, yPercent: -dy }, { xPercent: dx, yPercent: dy, ease: "none" }, 0);
 });
-s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .07 }, .26);
+s1tl.fromTo(".s1lime", { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none", duration: .07 }, .36);
 s1tl.to(".mark1", { opacity: 0, scale: .6, ease: "none", duration: .06 }, .28);
 s1tl.to(".mark2", { opacity: .45, ease: "none", duration: .08 }, .28);
 s1tl.to(mWords, { opacity: 1, y: 0, stagger: .007, ease: "none", duration: .1 }, .50);
@@ -802,7 +802,7 @@ applyPita();
 window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
 sLayers.forEach((L, i) => {
   if (i === 0) return;
-  const w = i === 1 ? .215 : i === 4 ? .71 : i / 5 - .025;
+  const w = i === 1 ? .25 : i === 4 ? .75 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
   const tOut = [sLayers[i - 1].querySelector(".clonetitle"), sLayers[i - 1].querySelector(".sinfo")];
   secTl.to(spills[i - 1], { opacity: 0, duration: .03, ease: "none" }, w + .05);
