@@ -804,8 +804,9 @@ const pita = { k: 0 };
 const applyPita = () => sLayers.forEach((L, j) => {
   gsap.set(L, { yPercent: (j - pita.k) * 100 });
   const sf = L.querySelector(".sframe");
-  // ponytail: card counter-slide sin — ref transition leaves ~155px gap at midline
-  gsap.set(sf, { yPercent: -50 - 15.7 * Math.sin(Math.PI * (pita.k - j + 1)) });
+  // ponytail: asymmetric counter-slide (ref: out bottom 398, in top 553 at k=.5)
+  const s = Math.sin(Math.PI * (pita.k - j + 1));
+  gsap.set(sf, { yPercent: -50 - (s < 0 ? 15.7 : 11.1) * s });
 });
 applyPita();
 window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
