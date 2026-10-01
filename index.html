@@ -805,13 +805,13 @@ const applyPita = () => sLayers.forEach((L, j) => {
   gsap.set(L, { yPercent: (j - pita.k) * 100 });
   const sf = L.querySelector(".sframe");
   // ponytail: card counter-slide sin — ref transition leaves ~155px gap at midline
-  gsap.set(sf, { yPercent: -50 - 10 * Math.sin(Math.PI * (pita.k - j + 1)) });
+  gsap.set(sf, { yPercent: -50 - 15.7 * Math.sin(Math.PI * (pita.k - j + 1)) });
 });
 applyPita();
 window._dbg = { pita, secTl: () => secTl.progress(), n: sLayers.length };
 sLayers.forEach((L, i) => {
   if (i === 0) return;
-  const w = i === 1 ? .205 : i === 4 ? .75 : i / 5 - .025;
+  const w = i === 1 ? .215 : i === 4 ? .75 : i / 5 - .025;
   secTl.to(pita, { k: i, duration: .05, ease: "power2.inOut", onUpdate: applyPita }, w);
   const tOut = [sLayers[i - 1].querySelector(".clonetitle"), sLayers[i - 1].querySelector(".sinfo")];
   secTl.to(spills[i - 1], { opacity: 0, duration: .03, ease: "none" }, w + .05);
