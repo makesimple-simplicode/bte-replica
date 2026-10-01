@@ -89,7 +89,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:540svh;background:var(--lime);z-index:1}
+#stage1{height:544svh;background:var(--lime);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -881,7 +881,7 @@ function navCheck(){
   nav.classList.toggle("scrolled", scrollY > innerHeight * .55);
   const gStart = document.getElementById("graph").offsetTop;
   const mStart = document.getElementById("mission").offsetTop;
-  const stage1Hide = scrollY > innerHeight * .6 && scrollY < gStart - innerHeight * .5;
+  const stage1Hide = scrollY < gStart - innerHeight * .5;
   nav.classList.toggle("hide", stage1Hide || scrollY >= mStart - 100);
 }
 addEventListener("scroll", navCheck, { passive: true });
