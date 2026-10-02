@@ -89,7 +89,7 @@ button,input{font:inherit;color:inherit}
 .scrollcue svg{width:1.3rem;height:1.3rem}
 
 /* ---------- 2 STAGE1: collage -> manifesto -> prosperity ---------- */
-#stage1{height:544svh;background:var(--lime);z-index:1}
+#stage1{height:445svh;background:var(--lime);z-index:1}
 #stage1 .pinned{background:var(--cream)}
 .s1bg{position:absolute;inset:0;background:var(--cream)}
 .s1lime{position:absolute;inset:0;background:#DFFF5C;clip-path:inset(100% 0 0 0)}
@@ -97,13 +97,13 @@ button,input{font:inherit;color:inherit}
 .s1imgs img{position:absolute;top:0;left:0;height:30lvh;width:auto;transform-origin:50% 50%;display:block}
 .mark1{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(22vw,42vh);height:min(22vw,42vh);color:var(--lime)}
 .mark2{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(40vw,50svh);height:min(40vw,50svh);color:rgba(250,251,248,.7);opacity:0}
-.mline{position:absolute;left:50%;top:50.7%;transform:translate(-50%,-50%);width:min(65%,940px);text-align:center;font-weight:600;font-size:min(calc((2.8rem) + (5.4 - 2.8) * (100vw - 37.5rem) / 106.5),5.4rem);letter-spacing:-.02em;line-height:1.2;color:var(--ink);z-index:3}
+.mline{position:absolute;left:50%;top:50.7%;transform:translate(-50%,-50%);width:min(65%,940px);text-align:center;font-weight:500;font-size:4.15vw;letter-spacing:-.02em;line-height:1.075;color:var(--ink);z-index:3}
 .mline .w{display:inline-block;opacity:0;transform:translateY(.4em)}
-.prosph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;font-weight:500;font-size:min(calc((3.4rem) + (7 - 3.4) * (100vw - 37.5rem) / 106.5),7rem);letter-spacing:-.03em;color:var(--ink);text-align:center;white-space:nowrap}
+.prosph{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;font-weight:500;font-size:4.15vw;letter-spacing:-.02em;color:var(--ink);text-align:center;white-space:nowrap}
 .prosph .w{display:inline-block;opacity:0;transform:translateY(.5em)}
 
 /* ---------- 3 GRAPH ---------- */
-#graph{height:312svh;background:transparent;z-index:1}
+#graph{height:210svh;background:transparent;z-index:1}
 #graph .pinned{z-index:3;background:var(--cream)}
 #graph .pinned{background:var(--cream);display:flex;align-items:center;justify-content:center;overflow:visible;color:var(--ink)}
 .gbox{width:min(58.4svh,58.9vw);height:59.67svh;position:relative;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;overflow:visible}
@@ -128,7 +128,7 @@ button,input{font:inherit;color:inherit}
 .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
 /* ---------- 4 WORDS ---------- */
-#words{height:300svh;margin-top:-800px;background:var(--cream);z-index:0}
+#words{height:260svh;margin-top:-.15svh;background:var(--cream);z-index:0}
 #words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
 .wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:59.67svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
 .wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
@@ -145,7 +145,7 @@ button,input{font:inherit;color:inherit}
 .plus.br{right:-1rem;bottom:-1rem}
 
 /* ---------- 5 QUOTE ---------- */
-.quote{position:relative;height:100svh;overflow:hidden;color:var(--cream);z-index:1}
+.quote{position:relative;height:100svh;margin-top:-5svh;overflow:hidden;color:var(--cream);z-index:1}
 .quote .bg{position:absolute;inset:0;overflow:hidden}
 .quote .bg img{transform:scaleY(1.25);transform-origin:center bottom}
 .quote .bg video,.quote .bg img{width:100%;height:100%;object-fit:cover}
@@ -163,7 +163,7 @@ button,input{font:inherit;color:inherit}
 .quote .plusc{position:absolute;left:50%;bottom:1.6rem;transform:translateX(-50%);width:1.6rem;height:1.6rem;color:var(--cream);opacity:.9}
 
 /* ---------- 6 MISSION ---------- */
-.mission{position:relative;height:345svh;background:#000;color:var(--cream);z-index:1}
+.mission{position:relative;height:345svh;margin-top:-72svh;background:#000;color:var(--cream);z-index:1}
 .mission .mstick{position:sticky;top:0;height:100svh;overflow:hidden}
 .mission .txt{position:absolute;left:50%;transform:translate(-50%,-50%);top:50%;width:100%;max-width:94vw;text-align:left;font-weight:500;font-size:2.25vw;line-height:1.1;letter-spacing:-.02em;z-index:2}
 .mission .txt .lime{color:var(--lime)}
@@ -179,7 +179,7 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.mission .txt{width:86%;max-width:none;font-size:4.85vw}.mission img{opacity:.5}}
 
 /* ---------- 7 SECTORS (pinned x5) ---------- */
-#sectors{height:690svh;background:#000;z-index:1}
+#sectors{height:512svh;background:#000;z-index:1}
 #sectors .pinned{background:#12110e}
 .slayer{position:absolute;inset:0}
 .slayer .sframe{position:absolute;left:50%;top:calc(50% + 2svh);transform:translate(-50%,-50%);width:min(84vw,1360px);height:71svh;overflow:visible;z-index:2}
@@ -198,7 +198,7 @@ button,input{font:inherit;color:inherit}
 
 /* ---------- 8 INNOVATION ---------- */
 .innov{position:relative;height:100svh;background:#151515;color:var(--cream);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:28.8rem;overflow:visible;z-index:1}
-.innov h2{font-weight:500;font-size:min(3.34vw,4.8rem);letter-spacing:-.03em;line-height:1.1;text-align:center;white-space:pre-line}
+.innov h2{font-weight:500;font-size:3.34vw;letter-spacing:-.03em;line-height:1.08;text-align:center;white-space:pre-line}
 .innov h2 .lime{color:var(--lime);font-weight:700}
 #innovH{margin-top:-9.4svh}
 .innov h2 .line{display:block;overflow:hidden}
@@ -207,13 +207,15 @@ button,input{font:inherit;color:inherit}
 .innov .pill:hover{filter:brightness(.93)}
 
 /* ---------- 9 APPROACH (pinned x3) ---------- */
-#approach{height:400svh;background:var(--cream);z-index:1}
+#approach{height:420svh;background:var(--cream);z-index:1}
 #approach .pinned{background:var(--cream);color:var(--ink);overflow:hidden}
 .aplayer{position:absolute;inset:0;display:flex;align-items:center;padding:0 var(--side);z-index:2}
 .aplayer[data-i="1"]{align-items:flex-start;padding-top:22svh}
-.aplayer .chapter{width:min(36%,500px);margin-left:4rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.16;color:rgba(18,17,14,.92)}
+.aplayer .chapter{width:15em;margin-left:11.7rem;font-weight:500;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);letter-spacing:-.02em;line-height:1.1;color:rgba(18,17,14,.92);display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:4.2rem}
 .aplayer[data-i="2"] .chapter{margin-left:9.3rem}
-.aplayer .chapter .body{margin-top:1.65em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.16;letter-spacing:-.02em;color:rgba(18,17,14,.88);white-space:pre-line}
+.aplayer .chapter .eyebrow{color:#12110eeb;margin-bottom:1.65em}
+.aplayer .chapter .sub{white-space:pre-line}
+.aplayer .chapter .body{margin-top:.7em;font-size:min(calc((1.8rem) + (3.2 - 1.8) * (100vw - 37.5rem) / 106.5),3.2rem);line-height:1.1;letter-spacing:-.02em;color:#7f7f7feb;white-space:pre-line}
 .pdots{position:absolute;left:1.4rem;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:.7rem;z-index:3}
 .pdots b{width:.72rem;height:.72rem;border-radius:50%;border:0;background:rgba(18,17,14,.45);transition:background .2s}
 .pdots b.on{background:var(--lime)}
@@ -248,7 +250,7 @@ button,input{font:inherit;color:inherit}
 @media (max-width:63.99em){.aplayer .chapter{width:84%;margin-left:2.4rem}.circles{opacity:.35}}
 
 /* ---------- 10 SIGNUP ---------- */
-.signup{background:var(--grey);color:#fff;border-top:1px solid rgba(18,17,14,.3);padding:4.4rem var(--side) 19.5rem;position:relative;z-index:1}
+.signup{background:var(--grey);color:#fff;border-top:1px solid rgba(18,17,14,.3);padding:3.1rem var(--side) 6.1rem;position:relative;z-index:1}
 .signup .row{display:grid;grid-template-columns:repeat(12,1fr);column-gap:var(--gap)}
 .signup .col-l{grid-column:1/-1}
 .signup .col-r{grid-column:1/-1;margin-top:3.4rem}
@@ -270,7 +272,7 @@ button,input{font:inherit;color:inherit}
 /* ---------- 11 FOOTER ---------- */
 .footer{width:100%;background:#000;position:sticky;bottom:0;z-index:-1;overflow:hidden;color:var(--cream)}
 .footer .primary{display:flex;flex-direction:row;border-top:1px solid rgba(250,251,248,.3)}
-.footer .plink{flex:1;height:37.7rem;position:relative;border-bottom:1px solid rgba(250,251,248,.3);display:flex;align-items:flex-end;justify-content:space-between;padding:0 calc(var(--gap) - 1.3rem) 1.8rem calc(var(--gap) - .3rem);color:var(--cream);font-weight:500;font-size:min(calc((2.2rem) + (4.8 - 2.2) * (100vw - 37.5rem) / 106.5),4.8rem);letter-spacing:-.03em;overflow:hidden}
+.footer .plink{flex:1;height:37.7rem;position:relative;border-bottom:1px solid rgba(250,251,248,.3);display:flex;align-items:flex-end;justify-content:space-between;padding:0 1.9rem 1.8rem 2.9rem;color:var(--cream);font-weight:500;font-size:min(calc((2.2rem) + (4.8 - 2.2) * (100vw - 37.5rem) / 106.5),4.8rem);letter-spacing:-.03em;overflow:hidden}
 .footer .plink>span{display:block;transition:transform .35s cubic-bezier(.33,1,.68,1)}
 .footer .plink:hover>span{transform:translateY(-8%)}
 .footer .plink+.plink{border-left:1px solid rgba(250,251,248,.3)}
@@ -515,18 +517,18 @@ Energy</div>
     <div class="pdots" id="apDots"><b class="on"></b><b></b><b></b></div>
     <div class="aplayer" data-i="0">
       <div class="chapter">
-        <div>Investing in Opportunity</div>
-        <div class="body">We survey the landscape for white space where we can drive technology discovery and leverage our unique talents to build great companies from the ground up.</div>
+        <div class="eyebrow">Our Ventures<br>innovation approach</div>
+        <div class="sub">Based on a clear investment thesis, we discover promising technologies and leverage our unique resources and talent to build companies from the ground up.</div>
       </div>
     </div>
     <div class="aplayer" data-i="1">
       <div class="chapter">
-        <div class="body">We partner with the world's leading innovators to turn breakthrough technologies into great businesses.</div>
+        <div class="sub">Once the technology has been validated, we accelerate the development of breakthrough innovations and build resilient companies.</div>
       </div>
     </div>
     <div class="aplayer" data-i="2">
       <div class="chapter">
-        <div class="body">Superior performance is our north star&mdash;clean technologies have to be affordable and reliable to reach global scale.</div>
+        <div class="sub">We focus on driving down the costs and eliminating green premiums of clean technologies so they can be deployed globally.</div>
       </div>
     </div>
     <div class="circles" id="apCircles" aria-hidden="true" data-ch="0">
