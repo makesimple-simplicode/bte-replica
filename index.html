@@ -127,25 +127,25 @@ button,input{font:inherit;color:inherit}
 .gmark.mid{top:68%}
 .eyebrow-pos{position:absolute;left:var(--side);top:50%;transform:translateY(-50%);z-index:4}
 
-/* ---------- 4 WORDS ---------- */
-#words{height:260svh;margin-top:-.15svh;background:var(--cream);z-index:0}
+/* ---------- 4 WORDS (port HomeImageStack ref) ---------- */
+#words{height:340svh;margin-top:-.15svh;background:var(--cream);z-index:0}
 #words .pinned{background:var(--cream);overflow:visible;color:var(--ink)}
-.wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:65svh;background:var(--cream);border:1px solid rgba(18,17,14,.35);border-radius:5px;container-type:size;z-index:2}
-.wframe>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0}
-.wtypo{font-weight:500;font-size:max(20px,14.65cqw);line-height:1.08;letter-spacing:-.04em;position:relative;z-index:3}
-.wlabels{position:absolute;bottom:50cqh;left:-24cqw;z-index:3}
-.wlabels>div{opacity:0;transform:translateY(.35em)}
-.wlabelsW,.wsubW{color:var(--cream)}
-.wlabelsW{clip-path:inset(0 0 0 24cqw)}
-.wsubW{clip-path:inset(0 24cqw 0 0)}
-.wsub{position:absolute;bottom:50cqh;right:-24cqw;z-index:3;text-align:right;opacity:0;transform:translateY(.35em)}
-.wsub .lime{color:var(--lime)}
-.plus{position:absolute;width:2rem;height:2rem;color:var(--ink);z-index:4}
-.plus.tl{left:-1rem;top:-1rem}
-.plus.br{right:-1rem;bottom:-1rem}
+.wframe{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(58.4svh,58.9vw);height:65svh;background:var(--cream);border-radius:3px;container-type:size;z-index:2;visibility:hidden}
+.wframe.vis{visibility:visible}
+.wtext,.wmask{position:absolute;inset:0}
+.wmask{overflow:clip;border-radius:3px}
+.wimgs{position:absolute;inset:0;overflow:clip;border-radius:3px}
+.wimg{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;opacity:0}
+.wimg:first-child{opacity:1}
+.wtypo{font-weight:500;font-size:max(20px,15.2cqw);line-height:1.09;letter-spacing:-.04em;margin-bottom:-.16em}
+.wlabels{position:absolute;bottom:calc(50cqh - 3px);left:-23.2cqw}
+.wlabels>div{opacity:0}
+.wsub{position:absolute;bottom:calc(50cqh - 3px);right:-26.5cqw;text-align:right;opacity:0}
+.wmask .wlabels{color:#fafbf8}
+.wmask .wsub{color:#dfff5c}
 
 /* ---------- 5 QUOTE ---------- */
-.quote{position:relative;height:100svh;margin-top:-5svh;overflow:hidden;color:var(--cream);z-index:1}
+.quote{position:relative;height:100svh;margin-top:-85svh;overflow:hidden;color:var(--cream);z-index:1}
 .quote .bg{position:sticky;top:0;height:100svh;overflow:hidden}
 .quote .bg img{transform:translateY(0)}
 .quote .bg video,.quote .bg img{width:100%;height:100%;object-fit:cover}
@@ -298,6 +298,7 @@ button,input{font:inherit;color:inherit}
 @media (max-width: 47.99em){
   .wlabels { left: -26.4cqw; }
   .wsub { right: -25.8cqw; }
+  .wframe{height:59.67svh}
 }
 @media (max-aspect-ratio: 12/9){
   .eyebrow-pos { top: auto; bottom: 3.8rem; left: auto; right: var(--side); transform: none; text-align: center; }
@@ -389,22 +390,31 @@ Energy</div>
   </div>
 </section>
 
-<!-- 4 WORDS -->
+<!-- 4 WORDS (port HomeImageStack ref) -->
 <section class="pin" id="words" data-theme="dark">
   <div class="pinned">
-    <div class="eyebrow eyebrow-pos" id="wordsEyebrow">The opportunity ahead</div>
     <div class="wframe">
-      <img class="wimg" id="wimg1" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
-      <img class="wimg" id="wimg2" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8bec8140-d4f5-4949-80d6-544136ca4a58/clean-energy-2.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
-      <img class="wimg" id="wimg3" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
-      <div class="wlabels wtypo">
-        <div>Affordable</div>
-        <div>Reliable</div>
-        <div>Clean</div>
+      <div class="wtext">
+        <div class="wlabels wtypo">
+          <div>Affordable</div>
+          <div>Reliable</div>
+          <div>Clean</div>
+        </div>
+        <div class="wsub wtypo">Energy</div>
       </div>
-      <div class="wsub wtypo"><span class="lime">En</span>ergy</div>
-      <svg class="plus tl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
-      <svg class="plus br" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 2v20M2 12h20"/></svg>
+      <div class="wimgs">
+        <img class="wimg" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/d35ee65e-ea1e-476d-85bd-29f5f77b37f4/Affordable.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+        <img class="wimg" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/68b4aeed-245e-474e-a69c-2b209709f5af/image-2.png?fm=jpg&dpr=1&q=60&w=1024" alt="">
+        <img class="wimg" src="https://images.breakthroughenergy.org/4bb91847-d552-009a-ce6f-52272156c6c2/8bec8140-d4f5-4949-80d6-544136ca4a58/clean-energy-2.jpg?fm=jpg&dpr=1&q=60&w=1024" alt="">
+      </div>
+      <div class="wmask">
+        <div class="wlabels wtypo">
+          <div>Affordable</div>
+          <div>Reliable</div>
+          <div>Clean</div>
+        </div>
+        <div class="wsub wtypo">Energy</div>
+      </div>
     </div>
   </div>
 </section>
@@ -595,6 +605,7 @@ Energy</div>
 
 <script src="libs/gsap.min.js"></script>
 <script src="libs/ScrollTrigger.min.js"></script>
+<script src="libs/CustomEase.min.js"></script>
 <script src="libs/lenis.min.js"></script>
 <script>
 /* ============ flower SVG ============ */
@@ -608,14 +619,7 @@ function flowerBig(){
 }
 document.querySelectorAll(".flower,.flower-big").forEach(g => { g.innerHTML = flowerBig(); });
 
-/* ============ words: salinan putih di-clip ke frame (bukti ref: huruf putih di atas gambar) ============ */
-["wlabels","wsub"].forEach(cls => {
-  const el = document.querySelector("." + cls);
-  const c = el.cloneNode(true);
-  c.classList.add(cls + "W");
-  c.setAttribute("aria-hidden","true");
-  el.parentNode.appendChild(c);
-});
+/* ============ words: overlay lama dihapus (port HomeImageStack) ============ */
 
 /* ============ util: split kata ============ */
 function splitWords(el){
@@ -637,7 +641,7 @@ function splitWords(el){
 const isStatic = location.search.includes("static");
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, CustomEase);
 
 /* ============ Lenis smooth scroll ============ */
 let lenis = null;
@@ -770,20 +774,55 @@ gtl.fromTo(".gmark.mid", { opacity: 0, y: 12 }, { opacity: 1, y: 0, ease: "none"
 gsap.from("#graphEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
   scrollTrigger: { trigger: "#graph", start: "top 60%" } });
 
-/* ============ WORDS scrub ============ */
-const wtl = gsap.timeline({
-  scrollTrigger: { trigger: "#words", start: "top top", end: "bottom bottom", scrub: .5 }
-});
-wtl.to("#wimg1", { opacity: 1, ease: "none", duration: .06 }, .02);
-wtl.to(".wlabels > div:nth-child(1)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .06);
-wtl.to(".wsub", { opacity: 1, y: 0, ease: "none", duration: .08 }, .10);
-wtl.to("#wimg1", { opacity: 0, ease: "none", duration: .08 }, .95);
-wtl.to("#wimg2", { opacity: 1, ease: "none", duration: .08 }, .97);
-wtl.to(".wlabels > div:nth-child(2)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .06);
-wtl.to(".wlabels > div:nth-child(1)", { opacity: 0, ease: "none", duration: .06 }, .95);
-wtl.to(".wlabels > div:nth-child(3)", { opacity: 1, y: 0, ease: "none", duration: .08 }, .90);
-gsap.from("#wordsEyebrow", { opacity: 0, x: -20, duration: .6, ease: "sine.out",
-  scrollTrigger: { trigger: "#words", start: "top 60%" } });
+/* ============ WORDS scrub (port HomeImageStack ref) ============ */
+/* Ref (app.js HomeImageStack): kolom label menggelinding naik y:3a->2a->a->0 (a=tinggi label);
+   tiap label/gambar muncul berurutan (t=0.01/1.5/2.5); gambar menumpuk + zoom 1->1.1 (imgEase);
+   subtitle y:a->0 di t=0.2 (custom ease M0,0 C0,0.023 0,0.229 0,0.248 0,0.699 0.493,1 1,1);
+   driver: visible K7.6-11.5, progress=map(K,7.9,9.8) */
+const wf = document.querySelector(".wframe");
+const wCols = [...document.querySelectorAll("#words .wlabels")];          /* 2 kolom (dark + masked) */
+const wLabA = [...document.querySelectorAll("#words .wtext .wlabels > div")];  /* 3 label */
+const wLabB = [...document.querySelectorAll("#words .wmask .wlabels > div")];  /* 3 label masked */
+const wSubs = [...document.querySelectorAll("#words .wsub")];             /* 2 subtitle */
+const wImgs = [...document.querySelectorAll("#words .wimg")];
+const wStep = () => wLabA[0].getBoundingClientRect().height || 40;  /* a */
+const easeW = CustomEase.create("wEase", "M0,0 C0,0.023 0,0.229 0,0.248 0,0.699 0.493,1 1,1");
+const easeWimg = CustomEase.create("wImgEase", "M0,0 C0.36,0.521 0.624,1 1,1");
+const wtl = gsap.timeline({ paused: true });
+(function buildW(){
+  const a = wStep();
+  const U = wLabA.length;               /* 3 */
+  const le = a * U;                     /* 3a */
+  wtl.set(wCols, { y: le }, 0);
+  wtl.set([wLabA, wLabB], { opacity: 0 }, 0);
+  wtl.set(wSubs, { y: a, opacity: 0 }, 0);
+  wtl.to(wSubs, { y: 0, ease: easeW, duration: .95 }, .2);
+  wtl.set(wSubs, { opacity: 1 }, .2);
+  for (let q = 0; q < U; q++){
+    const be = le - a * (q + 1);                 /* 3a, 2a, a */
+    const ke = q < 1 ? q + .01 : q + .5;         /* 0.01, 1.5, 2.5 */
+    wtl.to(wCols, { y: be, duration: .95, ease: easeW }, ke);
+    wtl.set([wLabA[q], wLabB[q]], { opacity: 1 }, ke);
+    if (q > 0){
+      wtl.set(wImgs[q], { opacity: 0, scale: 1 }, 0);
+      wtl.to(wImgs[q], { opacity: 1, duration: .1 }, ke);
+      wtl.to(wImgs[q], { scale: 1.1, duration: .95, ease: easeWimg }, ke);
+    } else {
+      wtl.set(wImgs[q], { opacity: 1 }, 0);
+    }
+  }
+  wtl.progress(.001);
+})();
+const W_V0 = 7.6, W_V1 = 11.5, W_P0 = 7.9, W_P1 = 9.8;
+function wTick(){
+  const K = scrollY / innerHeight;
+  const vis = K >= W_V0 && K <= W_V1;
+  wf.classList.toggle("vis", vis);
+  if (vis) wtl.progress(Math.min(1, Math.max(0, (K - W_P0) / (W_P1 - W_P0))));
+}
+addEventListener("scroll", wTick, { passive: true });
+addEventListener("resize", () => { wtl.progress(0); buildW(); wTick(); });
+wTick();
 
 /* ============ QUOTE reveal ============ */
 gsap.timeline({ scrollTrigger: { trigger: "#quote", start: "top 65%", end: "top top", scrub: .4 } })
