@@ -677,19 +677,21 @@ const swImgs = [...document.querySelectorAll("#stage1 .s1imgs img")];
 const TAU = Math.PI * 2;
 const swFrac = t => t - Math.floor(t);
 const swRand = t => swFrac(Math.sin(t * 43758.5453123) * 43758.5453123);
-const swU2 = t => t < .5 ? 2 * t * t : 1 - 2 * (1 - t) * (1 - t);
 const swSin = t => 1 - Math.cos(t * Math.PI / 2);
 const swSS = (t, e) => t < e ? 1 / (2 * e) * t * t : t - e / 2;
+const swSinIO = t => -(Math.cos(Math.PI * t) - 1) / 2;   /* sine.inOut — ease timeline ref */
 function swSeg(t, segs) { let v = segs[0][2]; for (const [s, d, a, b, e] of segs) { if (t < s) break; v = t > s + d ? b : a + (b - a) * e((t - s) / d); } return v; }
 function swProps(t) {
+  /* Timeline ImageSwirl desktop ref (app.js): rect 5→1.5→2.2→0, asp 0→.3→1,
+     rmul 1→.2→.36, radd .3→.48, rrand 1→.3→0 — ease sine.inOut */
   return {
-    asp: swSeg(t, [[.001, 2.3, 0, .1, swU2], [2.3, .9, .1, 0, swU2]]),
-    rect: swSeg(t, [[.001, 2.3, 1.5, .9, swU2], [2.3, .9, .9, 1.2, swU2], [3.2, 1.2, 1.2, 1.4, swU2], [5.95, 0, 1.4, 0, swU2]]),
-    rmul: swSeg(t, [[.001, 2.3, 1, .3, swU2], [2.3, .9, .3, .6, swU2]]),
-    radd: swSeg(t, [[.001, 2.3, .3, .03, swU2], [2.9, 1.5, .03, .05, swSin], [4.4, 1, .05, 1, swSin]]),
-    rrand: swSeg(t, [[2.3, .9, 1, .6, swU2], [3.2, 1.2, .6, 0, swU2]]),
+    asp: swSeg(t, [[.001, 2.3, 0, .3, swSinIO], [2.3, .9, .3, 1, swSinIO]]),
+    rect: swSeg(t, [[.001, 2.3, 5, 1.5, swSinIO], [2.3, .9, 1.5, 2.2, swSinIO], [5.95, .01, 2.2, 0, swSinIO]]),
+    rmul: swSeg(t, [[.001, 2.3, 1, .2, swSinIO], [2.3, .9, .2, .36, swSinIO]]),
+    radd: swSeg(t, [[4.4, 1, .3, .48, swSin]]),
+    rrand: swSeg(t, [[2.3, .9, 1, .3, swSinIO], [3.2, 1.2, .3, 0, swSinIO]]),
     rot: swSeg(t, [[1, 5, 0, 2, x => swSS(x, .07)]]),
-    rotm: swSeg(t, [[1, 1.3, 0, 0, swU2], [3.2, 2.2, 0, .8, x => swSS(x, .35)]])
+    rotm: swSeg(t, [[1, 1.3, 0, 0, swSinIO], [3.2, 2.2, 0, .8, x => swSS(x, .35)]])
   };
 }
 function swHk(t, seed) {
@@ -709,12 +711,12 @@ const SW_KDIV = parseFloat(SW_Q.get("kdiv") || 889);
 const SW_QO = parseFloat(SW_Q.get("qo") || 0);
 function swTick() {
   const lvh = innerHeight, ww = innerWidth, fe = ww / lvh;
-  const K = (scrollY - SW_KOFF) / SW_KDIV;
+  const K = scrollY / lvh;                       /* ref: progress = map(scroll/lvh, .1, 5.5) */
   const P = Math.min(1, Math.max(0, (K - .1) / 5.4));
   const pr = swProps(P * 6);
   const N = performance.now() / 1000;
-  const q = (pr.rot + pr.rotm - .2) * Math.PI + SW_QO;
-  const de = 1 + pr.asp * (fe - 1);
+  const q = (pr.rot + pr.rotm - .2) * .5 * TAU;
+  const de = pr.asp * (fe - 1) + 1;
   swImgs.forEach((el, i) => {
     const seed = swRand(i * .01);
     const ee = swHk(N, seed);
@@ -723,11 +725,11 @@ function swTick() {
     let x = 1 * X * pr.rect * SW_ZS;
     const P2 = swRand(seed) * pr.rrand;
     x *= .75 * P2 + .25;
-    const D = (i / 15) * TAU + q;
+    const D = (i / swImgs.length) * TAU + q;
     const Z = X * 1 * pr.rmul + pr.radd + P2 * .6 + x * .15 * ar;
-    const me = Z * ww * SW_RS;
-    const S = Math.cos(D) * me * de + ee[0] * .15 * ww * Z + ww * .5;
-    const g = Math.sin(D) * me + ee[1] * .15 * ww * Z + lvh * .5 - lvh * .15 - lvh * .15 * ar;
+    const me = Z * lvh * SW_RS;
+    const S = Math.cos(D) * me * de + ee[0] * .1 * lvh * Z + ww * .5;
+    const g = Math.sin(D) * me + ee[1] * .1 * lvh * Z + lvh * .5 - lvh * .15 - lvh * .15 * ar;
     el.style.translate = S.toFixed(2) + "px " + g.toFixed(2) + "px";
     el.style.scale = x.toFixed(4) + " " + x.toFixed(4);
   });
